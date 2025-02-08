@@ -1,7 +1,8 @@
 function App() {
   return (
     <>
-      <h1>Just a nice layout for my app :D</h1>
+      <h1 className="bg-primary">Just a nice layout for my app :D</h1>
+      <p className="text-base">dwanduwdwd</p>
     </>
   );
 }

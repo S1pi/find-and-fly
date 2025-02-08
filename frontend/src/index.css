@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Inknut Antiqua';
+  src: url(./assets/fonts/InknutAntiqua-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  /* Main colors */
+  --color-primary: #e5f4ff;
+  --color-secondary: #1a2e40;
+  --color-gold-accent: #f5b942;
+  --color-blue-btn: #38a2bc;
+
+  /* Extra lightblue if needed */
+  --color-lightblue: #b1cac9;
+
+  /* Neutral colors */
+  --color-green-accent: #4caf50;
+  --color-darkgrey: #2c2f33;
+  --color-lightgrey: #f5f7fa;
+  --color-midgrey: #a8b3c5;
+
+  /* Text sizes */
+  --text-base: 1rem;
+  --text-button: 0.875rem;
+  --text-h1: 2rem;
+  --text-h2: 1.75rem;
+  --text-h3: 1.5rem;
+  --text-h4: 1.25rem;
+  --text-h5: 1.125rem;
+  --text-h6: 1rem;
+
+  /* Font families */
+  --font-inknut: 'Inknut Antiqua', serif;
+}

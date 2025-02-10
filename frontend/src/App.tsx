@@ -1,12 +1,10 @@
-import BaseBtn from './components/buttons/BaseBtn';
-import DestinationCard from './components/cards/DestinationCard';
+import Header from './components/Header';
 
 function App() {
   return (
     <>
-      <div className='flex justify-center items-center h-screen bg-amber-100'>
-        {/* <DestinationCard /> */}
-        <BaseBtn>Login</BaseBtn>
+      <div className='flex  h-screen bg-amber-100'>
+        <Header />
       </div>
     </>
   );

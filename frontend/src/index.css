@@ -43,4 +43,9 @@
   /* Shadows */
   --drop-shadow-test: 0px 4px 4px rgba(0, 0, 0, 0.25);
   --drop-shadow-text: 0 1.2px 1.2px rgba(0, 0, 0, 0.8);
+
+  /* Media queries */
+  --breakpoint-1xl: 1200px;
+  --breakpoint-mid: 1080px;
+
 }

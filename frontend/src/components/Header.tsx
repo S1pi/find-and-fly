@@ -1,41 +1,83 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import BaseBtn from './buttons/BaseBtn';
 import {MdOutlineLanguage} from 'react-icons/md';
 import {FaStar} from 'react-icons/fa';
 import {GiHamburgerMenu} from 'react-icons/gi';
+import {IoMdClose} from 'react-icons/io';
+import useHamburgerMenu from '../hooks/useHamburgerMenu';
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-  // md = 768px muuttuu isMobileksi
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  const {isOpen, toggleMenu} = useHamburgerMenu();
+  // md = 768px muuttuu isSmallScreenksi
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (width <= 768) {
+      console.log('isSmallScreen');
+      setIsSmallScreen(true);
+    } else {
+      console.log('isDesktop');
+      setIsSmallScreen(false);
+    }
+  }, [width]);
 
   return (
     <div className='relative flex h-22 w-full items-center justify-center bg-primary px-2'>
       <img
         src='/img/FindAndFlyLogo.png'
         alt='Find&Fly Logo'
-        className='w- absolute left-4 h-3/4 rounded-2xl'
+        className='absolute left-4 h-3/5 rounded-2xl md:h-3/4'
       />
-      <h1 className='text-h5 font-bold text-gray-800 sm:text-h4 lg:text-h3 xl:text-h2'>
-        Explore, review and fly to your dream spots
+      <h1 className='text-base font-bold text-gray-800 sm:text-h4 lg:text-h3'>
+        {width < 600
+          ? 'Explore & Review'
+          : 'Explore, review and fly to your dream spots'}
       </h1>
-      {isMobile ? (
+      {isSmallScreen ? (
         <>
-          <GiHamburgerMenu className='text-2xl' />
+          <GiHamburgerMenu
+            className='absolute right-2 cursor-pointer text-2xl'
+            onClick={toggleMenu}
+          />
+          {isOpen ? (
+            <div className='border-pink absolute top-0 right-0 h-screen w-2/5 rounded-l-lg border-l-1 border-solid border-l-primary bg-secondary p-2 drop-shadow-hamburger'>
+              <IoMdClose
+                className='cursor-pointer rounded-sm border border-solid text-3xl'
+                onClick={toggleMenu}
+              />
+              <ul className='flex flex-col items-center justify-center'>
+                <li className='text-h3'>Home</li>
+                <li className='text-h3'>About</li>
+                <li className='text-h3'>Contact</li>
+              </ul>
+            </div>
+          ) : null}
         </>
       ) : (
         <>
           {loggedIn ? (
             <BaseBtn
               className='absolute right-2 smd:right-14 lg:right-26'
-              evtHanlder={() => {}}
+              onClick={() => {}}
             >
               Profile
             </BaseBtn>
           ) : (
             <BaseBtn
               className='absolute right-2 smd:right-14 lg:right-26'
-              evtHanlder={() => {}}
+              onClick={() => {}}
             >
               Login
             </BaseBtn>

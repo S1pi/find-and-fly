@@ -47,5 +47,12 @@
   /* Media queries */
   --breakpoint-1xl: 1200px;
   --breakpoint-mid: 1080px;
+}
 
+/* Kouluesimerkit */
+
+@layer base {
+  html {
+    font-family: var(--font-inknut);
+  }
 }

@@ -50,6 +50,9 @@
   --breakpoint-mid: 1080px;
   --breakpoint-smd: 840px;
   --breakpoint-xs: 620px;
+
+  /* Custom heights */
+  --height-screenWithoutHeader: calc(100vh - 5.5rem);
 }
 
 /* Kouluesimerkit */
@@ -81,5 +84,9 @@
 
   h6 {
     @apply text-h6;
+  }
+
+  p {
+    @apply text-base;
   }
 }

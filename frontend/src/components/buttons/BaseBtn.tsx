@@ -8,11 +8,11 @@ type btnProps = {
 
 const BaseBtn = ({children, className, onClick = () => {}}: btnProps) => {
   const baseStyles =
-    'bg-gradient-to-r from-blue-btn via-55% via-blueg1 to-blueg2 text-white text-button font-medium py-2 px-4 rounded-4xl w-30';
+    'bg-gradient-to-r from-blue-btn via-55% via-blueg1 to-blueg2 text-primary text-button font-medium py-2 px-4 rounded-4xl w-30';
 
   return (
     <button className={`${baseStyles} ${className}`} onClick={onClick}>
-      <p>{children}</p>
+      {children}
     </button>
   );
 };

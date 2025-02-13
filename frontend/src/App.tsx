@@ -1,10 +1,12 @@
 import Header from './components/Header';
+import ProfileSidebar from './components/ProfileSidebar';
 
 function App() {
   return (
     <>
-      <div className='flex  h-screen bg-amber-100'>
+      <div className='h-screen bg-amber-100'>
         <Header />
+        <ProfileSidebar />
       </div>
     </>
   );

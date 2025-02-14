@@ -4,9 +4,10 @@ import ProfileSidebar from './components/ProfileSidebar';
 function App() {
   return (
     <>
-      <div className='h-screen bg-amber-100'>
+      <div className='h-screen bg-gradient-to-br from-primary to-lightblue'>
         <Header />
         <ProfileSidebar />
+        {/* <DestinationCard /> */}
       </div>
     </>
   );

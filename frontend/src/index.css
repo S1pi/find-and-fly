@@ -43,7 +43,8 @@
   /* Shadows */
   --drop-shadow-test: 0px 4px 4px rgba(0, 0, 0, 0.25);
   --drop-shadow-text: 0 1.2px 1.2px rgba(0, 0, 0, 0.8);
-  --drop-shadow-hamburger: -5px 0 15px rgba(0, 0, 0, 0.3);
+  --drop-shadow-hamburger: -5px 0 15px rgba(26, 46, 64, 0.45);
+  --shadow-sidebar: 0px 0px 18px rgba(26, 46, 64, 0.5);
 
   /* Media queries */
   --breakpoint-1xl: 1200px;

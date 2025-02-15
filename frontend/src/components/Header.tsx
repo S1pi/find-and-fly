@@ -52,7 +52,7 @@ const Header = () => {
             onClick={toggleMenu}
           />
           {isOpen ? (
-            <div className='border-pink absolute top-0 right-0 h-screen w-2/5 rounded-l-lg border-l-1 border-solid border-l-primary bg-secondary p-2 drop-shadow-hamburger'>
+            <div className='border-pink absolute top-0 right-0 z-9999 h-screen w-2/5 rounded-l-lg border-l-1 border-solid border-l-primary bg-secondary p-2 drop-shadow-hamburger'>
               <IoMdClose
                 className='cursor-pointer rounded-sm border border-solid text-3xl'
                 onClick={toggleMenu}

@@ -4,7 +4,7 @@ import {IoIosStar} from 'react-icons/io'; // Filled star icon
 
 const ProfileSidebar = () => {
   return (
-    <div className='ml-[2vw] flex h-screenWithoutHeader w-68 flex-col shadow-sidebar'>
+    <div className='absolute ml-[2vw] flex h-screenWithoutHeader w-68 flex-col shadow-sidebar'>
       <div className='relative flex-2 bg-[url("/img/depositphotos_53489917-stock-photo-vertical-landscape-view-of-mountain.jpg")] bg-cover bg-center'>
         <div className='absolute bottom-0 left-1/2 h-40 w-40 -translate-x-1/2 translate-y-1/3 rounded-full border-6 border-lightgrey bg-[url("/img/pexels-souvenirpixels-414612.jpg")] bg-cover bg-center shadow-2xl'></div>
       </div>

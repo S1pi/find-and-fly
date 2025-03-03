@@ -56,6 +56,17 @@
 
   /* Custom heights */
   --height-screenWithoutHeader: calc(100vh - 5.5rem);
+
+  /* Custom spacings */
+  --spacing-sidebar: 17rem;
+  /* --spacing-afterSidebar: calc(var(--spacing-sidebar) + 3vw); */
+  --spacing-afterSidebar: clamp(
+    314px,
+    calc(var(--spacing-sidebar) + 3vw),
+    360px
+  );
+
+  --spacing-sidebarMargin: clamp(16px, 2vw, 36px);
 }
 
 /* Kouluesimerkit */
@@ -91,5 +102,16 @@
 
   p {
     @apply text-base;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

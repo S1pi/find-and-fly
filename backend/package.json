@@ -1,0 +1,53 @@
+{
+  "name": "faf-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "modules/auth-server",
+    "modules/file-server",
+    "modules/media-server"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:auth": "cd modules/auth-server && npm run dev",
+    "dev:file": "cd modules/file-server && npm run dev",
+    "dev:media": "cd modules/media-server && npm run dev",
+    "dev:all": "concurrently \"npm run dev:auth\" \"npm run dev:file\" \"npm run dev:media\"",
+    "build:auth": "cd modules/auth-server && npm run build",
+    "build:file": "cd modules/file-server && npm run build",
+    "build:media": "cd modules/media-server && npm run build",
+    "build:all": "concurrently \"npm run build:auth\" \"npm run build:file\" \"npm run build:media\"",
+    "start:auth": "cd modules/auth-server && npm start",
+    "start:file": "cd modules/file-server && npm start",
+    "start:media": "cd modules/media-server && npm start",
+    "start:all": "concurrently \"npm run start:auth\" \"npm run start:file\" \"npm run start:media\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.12.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
+    "eslint": "^9.20.0",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^15.14.0",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
+  }
+}

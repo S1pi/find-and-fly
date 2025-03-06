@@ -1,0 +1,19 @@
+{
+  "extends": "./modules/file-server/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./"
+  },
+  "references": [
+    {
+      "path": "./modules/file-server"
+    },
+    {
+      "path": "./modules/auth-server"
+    },
+    {
+      "path": "./modules/media-server"
+    }
+  ],
+  "include": ["./shared/**/*.ts"],
+  "exclude": ["node_modules", "test", "dist"]
+}

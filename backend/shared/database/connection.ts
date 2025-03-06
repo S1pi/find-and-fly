@@ -1,4 +1,5 @@
 import mysql from 'mysql2/promise';
+import '../config/envConfig';
 
 const promisePool = mysql.createPool({
   host: process.env.DB_HOST,

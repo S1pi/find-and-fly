@@ -1,5 +1,5 @@
 {
-  "extends": "./modules/file-server/tsconfig.json",
+  "extends": "./modules/auth-server/tsconfig.json",
   "compilerOptions": {
     "rootDir": "./"
   },

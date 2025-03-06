@@ -3,9 +3,13 @@ import express from 'express';
 import cors from 'cors';
 
 import api from './api'; // Imports /api/index.ts
+import {
+  errorHandler,
+  notFoundErrorHandler,
+} from './api/middlewares/errorHandlers';
 
 // Load environment variables
-dotenv.config();
+// dotenv.config();
 
 // Should we use morgan? Find out more at https://www.npmjs.com/package/morgan
 // app.use(morgan('dev'));
@@ -22,7 +26,7 @@ app.use(express.static('public'));
 
 app.use('/api', api);
 
-// app.use(notFound)
-// app.use(errorHandler)
+app.use(notFoundErrorHandler);
+app.use(errorHandler);
 
 export default app;

@@ -1,3 +1,5 @@
+import {UserWithoutPassword} from './DataTypes';
+
 type MessageResponse = {
   message: string;
 };
@@ -6,4 +8,9 @@ type ErrorResponse = MessageResponse & {
   stack?: string;
 };
 
-export type {MessageResponse, ErrorResponse};
+type SuccessUserCreationResponse = {
+  message: string;
+  user: UserWithoutPassword;
+};
+
+export type {MessageResponse, ErrorResponse, SuccessUserCreationResponse};

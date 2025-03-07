@@ -1,12 +1,12 @@
 # BACKEND
 
-### IMPORTANT
+## IMPORTANT
 
 Just for future this is here:
 
 If need to extend Express --> Request interface
 
-# CONTENT:
+### CONTENT:
 
 create file: types>express>index.d.ts
 
@@ -16,7 +16,7 @@ userOrSomethingElse?: YourCustomTypeHere;
 }
 }
 
-# tsconfig
+## tsconfig
 
 {
 "compilerOptions": {

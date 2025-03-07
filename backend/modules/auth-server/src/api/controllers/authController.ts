@@ -1,9 +1,9 @@
-import {NextFunction, Request, Response} from 'express';
+import e, {NextFunction, Request, Response} from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import CustomError from 'shared/utils/CustomError';
 import {createUser, getUserByUsername} from '../models/userModel';
-import {UserCreate} from 'types/DataTypes';
+import {TokenData, UserCreate, UserWithoutPassword} from 'types/DataTypes';
 import {SuccessUserCreationResponse} from 'types/MessageTypes';
 
 const salt = bcrypt.genSaltSync(10);
@@ -20,7 +20,7 @@ const loginUser = async (
     const isPasswordValid = bcrypt.compareSync(password, user.password);
 
     if (!isPasswordValid) {
-      next(new CustomError('Username or password is incorrect', 403));
+      next(new CustomError('Username or password is incorrect', 401));
       return;
     }
 
@@ -29,14 +29,30 @@ const loginUser = async (
       return;
     }
 
-    const userReturn = {
+    const userData: UserWithoutPassword = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      created_at: user.created_at,
+    };
+
+    const userTokenData: TokenData = {
       id: user.id,
       username: user.username,
       role: user.role,
     };
 
-    const token = jwt.sign(userReturn, process.env.JWT_SECRET, {
+    console.log('User Token Data: ', userTokenData);
+
+    const token = jwt.sign(userTokenData, process.env.JWT_SECRET, {
       expiresIn: '24h',
+    });
+
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: userData,
     });
   } catch (err) {
     next(err);

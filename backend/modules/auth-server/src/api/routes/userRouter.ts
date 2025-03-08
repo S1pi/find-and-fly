@@ -5,7 +5,7 @@ import userAuthenticator from '../middlewares/authentication';
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.json({message: 'Check for /login and /register routes'});
+  res.json({message: 'Check for /getbytoken route'});
 });
 
 // Change route to something else

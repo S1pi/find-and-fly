@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   res.json({message: 'Check for /login and /register routes'});
 });
 
+// Change route to something else
 router.get('/getbytoken', userAuthenticator, getUserByToken);
 
 export default router;

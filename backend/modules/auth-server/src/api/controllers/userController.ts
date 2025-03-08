@@ -29,9 +29,11 @@ const getUserByToken = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const testHello = 'Hello';
+    if (!req.user) {
+      throw new CustomError('User not found', 404);
+    }
 
-    const userData = req.user;
+    const userData: TokenData = req.user;
 
     console.log('User Data from userController: ', userData);
 

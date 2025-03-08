@@ -11,7 +11,7 @@ const userAuthenticator = async (
   try {
     const userToken = req.headers.authorization?.split(' ')[1];
 
-    console.log('User Token: ', userToken);
+    // console.log('User Token: ', userToken);
 
     if (!userToken) {
       res.status(401).json({message: 'Token not provided'});
@@ -31,9 +31,7 @@ const userAuthenticator = async (
 
     req.user = userDecoded;
 
-    console.log('User req object from authentication.ts: ', req.user);
-
-    // next();
+    next();
   } catch (err) {
     next(err);
   }

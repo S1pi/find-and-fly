@@ -1,3 +1,5 @@
+import {Request} from 'express';
+
 type User = {
   id: number;
   username: string;
@@ -11,4 +13,9 @@ type UserCreate = Omit<User, 'id' | 'created_at' | 'role'> & {role?: string};
 
 type UserWithoutPassword = Omit<User, 'password'>;
 
-export type {User, UserWithoutPassword, UserCreate};
+type TokenData = Omit<UserWithoutPassword, 'email' | 'created_at'> & {
+  iat?: number;
+  exp?: number;
+};
+
+export type {User, UserWithoutPassword, UserCreate, TokenData};

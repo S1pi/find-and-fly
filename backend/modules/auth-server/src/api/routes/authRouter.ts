@@ -36,7 +36,9 @@ router.post(
   body('password')
     .isString()
     .isLength({min: 6})
-    .withMessage('Password must be at least 6 characters'),
+    .withMessage('Password must be at least 6 characters')
+    .matches(/[A-Z]/)
+    .withMessage('Password must contain at least one uppercase letter'),
   body('email').trim().isEmail().withMessage('Invalid email').normalizeEmail(),
   validationErrorHandler,
   registerUser,

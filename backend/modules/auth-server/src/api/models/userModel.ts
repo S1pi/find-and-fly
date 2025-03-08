@@ -43,6 +43,20 @@ const createUser = async (user: UserCreate): Promise<UserWithoutPassword> => {
   };
 };
 
-// const
+const getAllUsers = async (): Promise<UserWithoutPassword[]> => {
+  const query = 'SELECT id, username, email, role, created_at FROM users';
 
-export {getUserByUsername, createUser};
+  const [rows] = await promisePool.execute<
+    RowDataPacket[] & UserWithoutPassword[]
+  >(query);
+
+  if (rows.length === 0) {
+    throw new CustomError('No users found', 404);
+  }
+
+  console.log('UserList from userModel', rows);
+
+  return rows;
+};
+
+export {getUserByUsername, createUser, getAllUsers};

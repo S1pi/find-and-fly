@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {getUserByToken} from '../controllers/userController';
+import {fetchAllUsers, getUserByToken} from '../controllers/userController';
 import userAuthenticator from '../middlewares/authentication';
 
 const router = Router();
@@ -10,5 +10,7 @@ router.get('/', (req, res) => {
 
 // Change route to something else
 router.get('/getbytoken', userAuthenticator, getUserByToken);
+
+router.get('/getAll', userAuthenticator, fetchAllUsers);
 
 export default router;

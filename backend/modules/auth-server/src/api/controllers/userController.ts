@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {TokenData} from 'types/DataTypes';
 import CustomError from 'utils/CustomError';
+import {getAllUsers} from '../models/userModel';
 
 // const getUserByToken = async (
 //   req: Request,
@@ -43,4 +44,19 @@ const getUserByToken = async (
   }
 };
 
-export {getUserByToken};
+const fetchAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    // Get all users from the database
+    const userList = await getAllUsers();
+
+    res.status(200).json({message: 'All users: ', userList});
+  } catch (err) {
+    next(err);
+  }
+};
+
+export {getUserByToken, fetchAllUsers};

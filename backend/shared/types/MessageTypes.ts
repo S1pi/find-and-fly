@@ -13,4 +13,14 @@ type SuccessUserCreationResponse = {
   user: UserWithoutPassword;
 };
 
-export type {MessageResponse, ErrorResponse, SuccessUserCreationResponse};
+type UserDeleteResponse = {
+  message: string;
+  user_id: number;
+};
+
+export type {
+  MessageResponse,
+  ErrorResponse,
+  SuccessUserCreationResponse,
+  UserDeleteResponse,
+};

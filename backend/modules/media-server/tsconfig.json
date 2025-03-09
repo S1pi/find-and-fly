@@ -16,9 +16,18 @@
     "composite": true /* Enable project references. */,
     "baseUrl": "../.." /* Base directory to resolve non-absolute module names. */,
     "paths": {
-      "types/*": ["shared/types/*"]
-    }
+      "types/*": ["shared/types/*"],
+      "utils/*": ["shared/utils/*"]
+    },
+    "typeRoots": ["../../shared/types"]
   },
-  "include": ["../../shared/**/*.ts", "./src/**/*.ts", "./*.js"],
+
+  // "include": ["./shared/**/*.ts", "./shared/**/*.d.ts"],
+  "include": [
+    "../../shared/**/*.ts",
+    // "../../shared/types/**/*",
+    "./src/**/*.ts",
+    "./*.js"
+  ],
   "exclude": ["node_modules", "test", "dist"]
 }

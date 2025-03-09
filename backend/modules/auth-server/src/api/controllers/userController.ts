@@ -1,7 +1,12 @@
 import {NextFunction, Request, Response} from 'express';
 import {TokenData, User, UserWithoutPassword} from 'types/DataTypes';
 import CustomError from 'utils/CustomError';
-import {changeUserData, getAllUsers, getUserById} from '../models/userModel';
+import {
+  changeUserData,
+  deleteUserById,
+  getAllUsers,
+  getUserById,
+} from '../models/userModel';
 import bcrypt from 'bcryptjs';
 
 // const getUserByToken = async (
@@ -102,4 +107,34 @@ const putUserData = async (
   }
 };
 
-export {getUserByToken, fetchAllUsers, fetchUserById, putUserData};
+const selfDeleteUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    // Delete user
+    const authendticatedUser = req.user;
+
+    if (!authendticatedUser) {
+      throw new CustomError('User not authendticated', 401);
+    }
+
+    const userId = authendticatedUser.id;
+
+    // Delete user by ID
+    const response = await deleteUserById(userId);
+
+    res.status(200).json(response);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export {
+  getUserByToken,
+  fetchAllUsers,
+  fetchUserById,
+  putUserData,
+  selfDeleteUser,
+};

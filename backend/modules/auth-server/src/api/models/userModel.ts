@@ -2,6 +2,7 @@ import {User, UserCreate, UserWithoutPassword} from 'types/DataTypes';
 import promisePool from 'shared/database/connection';
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
 import CustomError from 'shared/utils/CustomError';
+import {UserDeleteResponse} from 'types/MessageTypes';
 
 const getUserByUsername = async (username: string): Promise<User> => {
   const query = 'SELECT * FROM users WHERE username = ?';
@@ -131,10 +132,39 @@ const changeUserData = async (
   }
 };
 
+const deleteUserById = async (userId: number): Promise<UserDeleteResponse> => {
+  const dbConnection = await promisePool.getConnection();
+
+  try {
+    await dbConnection.beginTransaction();
+    const query = 'DELETE FROM users WHERE id = ?';
+
+    const [result] = await dbConnection.execute<ResultSetHeader>(query, [
+      userId,
+    ]);
+
+    await dbConnection.commit();
+
+    if (result.affectedRows === 0) {
+      throw new CustomError('User not found', 404);
+    }
+
+    console.log('User deleted from userModel', result);
+
+    return {message: 'User deleted (id): ', user_id: userId};
+  } catch (err) {
+    dbConnection.rollback();
+    throw new CustomError('Error deleting user', 500);
+  } finally {
+    dbConnection.release();
+  }
+};
+
 export {
   getUserByUsername,
   createUser,
   getAllUsers,
   getUserById,
   changeUserData,
+  deleteUserById,
 };

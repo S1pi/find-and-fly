@@ -4,6 +4,7 @@ import {
   fetchUserById,
   getUserByToken,
   putUserData,
+  selfDeleteUser,
 } from '../controllers/userController';
 import userAuthenticator from '../middlewares/authentication';
 import {body, param} from 'express-validator';
@@ -51,4 +52,8 @@ router.put(
   userAuthenticator,
   putUserData,
 );
+
+// Not admin delete route
+router.delete('/delete', userAuthenticator, selfDeleteUser);
+
 export default router;

@@ -1,7 +1,8 @@
 import {NextFunction, Request, Response} from 'express';
-import {TokenData} from 'types/DataTypes';
+import {TokenData, User, UserWithoutPassword} from 'types/DataTypes';
 import CustomError from 'utils/CustomError';
-import {getAllUsers} from '../models/userModel';
+import {changeUserData, getAllUsers, getUserById} from '../models/userModel';
+import bcrypt from 'bcryptjs';
 
 // const getUserByToken = async (
 //   req: Request,
@@ -23,6 +24,8 @@ import {getAllUsers} from '../models/userModel';
 //     next(err);
 //   }
 // };
+
+const salt = bcrypt.genSaltSync(12);
 
 const getUserByToken = async (
   req: Request,
@@ -59,4 +62,44 @@ const fetchAllUsers = async (
   }
 };
 
-export {getUserByToken, fetchAllUsers};
+const fetchUserById = async (
+  req: Request<{id: string}>,
+  res: Response<{message: string; user: UserWithoutPassword}>,
+  next: NextFunction,
+): Promise<void> => {
+  // Fetch user by ID
+  try {
+    const userId = req.params.id;
+    const user = await getUserById(Number(userId));
+    res.status(200).json({message: `Username: ${user.username} found: `, user});
+  } catch (err) {
+    next(err);
+  }
+};
+
+const putUserData = async (
+  req: Request<{}, {}, User>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const newUserdata = req.body;
+
+    const authendticatedUser = req.user;
+
+    if (!authendticatedUser) {
+      throw new CustomError('User not authendticated', 401);
+    }
+    if (newUserdata.password) {
+      newUserdata.password = await bcrypt.hash(newUserdata.password, salt);
+    }
+
+    const newData = await changeUserData(authendticatedUser.id, newUserdata);
+
+    res.status(200).json({message: 'Change user data'});
+  } catch (err) {
+    next(err);
+  }
+};
+
+export {getUserByToken, fetchAllUsers, fetchUserById, putUserData};

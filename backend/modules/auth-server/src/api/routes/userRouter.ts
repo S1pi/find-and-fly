@@ -13,7 +13,7 @@ import {validationErrorHandler} from '../middlewares/errorHandlers';
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.json({message: 'Check for /getbytoken route'});
+  res.json({message: 'routes: /getbytoken, /getAll, /:id, /update, /delete'});
 });
 
 // Change route to something else

@@ -7,7 +7,7 @@ import destinationsRouter from './routes/destinationsRouter';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response<MessageResponse>) => {
-  res.json({message: 'routes: media'});
+  res.json({message: 'routes: /reviews, /subdest, /destinations'});
 });
 
 router.use('/reviews', reviewsRouter);

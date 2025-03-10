@@ -18,4 +18,35 @@ type TokenData = Omit<UserWithoutPassword, 'email' | 'created_at'> & {
   exp?: number;
 };
 
-export type {User, UserWithoutPassword, UserCreate, TokenData};
+type Destination = {
+  id: number;
+  name: string;
+  country: string;
+  description: string;
+  user_id: number;
+  created_at: Date | string;
+  category_id: number;
+};
+
+type DestinationCreate = Omit<Destination, 'id' | 'created_at' | 'user_id'> & {
+  user_id?: number;
+};
+
+type SubDestination = {
+  id: number;
+  destination_id: number;
+  name: string;
+  description: string;
+  user_id: number;
+  created_at: Date | string;
+};
+
+export type {
+  User,
+  UserWithoutPassword,
+  UserCreate,
+  TokenData,
+  Destination,
+  DestinationCreate,
+  SubDestination,
+};

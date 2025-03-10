@@ -25,4 +25,4 @@ app.use('/api', api);
 app.use(notFoundErrorHandler);
 app.use(errorHandler);
 
-app.use();
+export default app;

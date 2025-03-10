@@ -67,14 +67,22 @@ const deleteDestination = async (
   id: number,
 ): Promise<DeleteDestinationMessage> => {
   const query = 'DELETE FROM destinations WHERE id = ?';
+  const dbConnection = await promisePool.getConnection();
 
-  const [result] = await promisePool.execute<ResultSetHeader>(query, [id]);
+  try {
+    dbConnection.beginTransaction();
 
-  if (result.affectedRows === 0) {
-    throw new CustomError('Error deleting destination', 500);
+    const [result] = await promisePool.execute<ResultSetHeader>(query, [id]);
+
+    if (result.affectedRows === 0) {
+      throw new CustomError('Destination not found', 404);
+    }
+
+    dbConnection.commit();
+    return {message: 'Destination deleted succesfully', destination_id: id};
+  } finally {
+    dbConnection.release();
   }
-
-  return {message: 'Destination deleted succesfully', destination_id: id};
 };
 
 export {

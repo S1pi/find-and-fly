@@ -39,6 +39,10 @@ type CreatedReviewMessage = MessageResponse & {
   review: Review;
 };
 
+type DeleteReviewMessage = MessageResponse & {
+  review_id: number;
+};
+
 export type {
   MessageResponse,
   ErrorResponse,
@@ -47,4 +51,5 @@ export type {
   CreatedDestinationMessage,
   DeleteDestinationMessage,
   CreatedReviewMessage,
+  DeleteReviewMessage,
 };

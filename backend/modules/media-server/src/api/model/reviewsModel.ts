@@ -1,7 +1,7 @@
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
 import promisePool from 'shared/database/connection';
-import {Review, ReviewCreate} from 'types/DataTypes';
-import {CreatedReviewMessage} from 'types/MessageTypes';
+import {Review, ReviewAction, ReviewCreate} from 'types/DataTypes';
+import {CreatedReviewMessage, DeleteReviewMessage} from 'types/MessageTypes';
 import CustomError from 'utils/CustomError';
 import {getDestinationFromId} from './destinationsModel';
 
@@ -92,4 +92,84 @@ const createReview = async (
   };
 };
 
-export {getAllReviewsDb, getOneReviewById, createReview};
+const deleteReview = async (id: number): Promise<DeleteReviewMessage> => {
+  const query = `DELETE FROM reviews WHERE id = ?`;
+  const dbConnection = await promisePool.getConnection();
+  try {
+    dbConnection.beginTransaction();
+
+    const [rows] = await promisePool.execute<ResultSetHeader>(query, [id]);
+
+    console.log(rows);
+
+    if (rows.affectedRows === 0) {
+      throw new CustomError('Review not found', 404);
+    }
+
+    dbConnection.commit();
+    return {message: 'Review deleted successfully', review_id: id};
+  } finally {
+    dbConnection.release();
+  }
+};
+
+const getReviewActionData = async (id: number): Promise<ReviewAction[]> => {
+  const query = `SELECT * FROM review_actions WHERE review_id = ?`;
+
+  const [rows] = await promisePool.execute<RowDataPacket[] & ReviewAction[]>(
+    query,
+    [id],
+  );
+
+  console.log('Review like data', rows);
+
+  return rows;
+};
+
+const updateReviewReaction = async (
+  userId: number,
+  reviewId: number,
+  reaction: string,
+) => {
+  const dbConnection = await promisePool.getConnection();
+  try {
+    const query = `UPDATE review_actions SET reaction = ? WHERE id = ? AND user_id = ?`;
+    const options = [reaction, reviewId, userId];
+
+    await promisePool.execute(query, options);
+
+    dbConnection.commit();
+    return {message: 'Review reaction updated', reaction: reaction};
+  } finally {
+    dbConnection.release();
+  }
+};
+
+const addReviewReaction = async (
+  userId: number,
+  reviewId: number,
+  reaction: string,
+) => {
+  const dbConnection = await promisePool.getConnection();
+  try {
+    const query = `INSERT INTO review_actions (user_id, review_id, reaction) VALUES (?, ?, ?)`;
+    const options = [userId, reviewId, reaction];
+
+    await promisePool.execute(query, options);
+
+    dbConnection.commit();
+    return {message: 'Review reaction added', reaction: reaction};
+  } finally {
+    dbConnection.release();
+  }
+};
+
+export {
+  getAllReviewsDb,
+  getOneReviewById,
+  createReview,
+  deleteReview,
+  getReviewActionData,
+  addReviewReaction,
+  updateReviewReaction,
+};

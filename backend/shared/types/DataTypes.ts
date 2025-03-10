@@ -63,6 +63,14 @@ type Review = {
 
 type ReviewCreate = Omit<Review, 'id' | 'created_at' | 'likes' | 'dislikes'>;
 
+type ReviewAction = {
+  id: number;
+  user_id: number;
+  review_id: number;
+  reaction: string;
+  created_at: Date | string;
+};
+
 export type {
   User,
   UserWithoutPassword,
@@ -74,4 +82,5 @@ export type {
   SubDestinationCreate,
   Review,
   ReviewCreate,
+  ReviewAction,
 };

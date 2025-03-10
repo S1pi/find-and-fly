@@ -1,8 +1,11 @@
 import {Router} from 'express';
 import {
+  deleteReviewById,
   getAllReviews,
   getReviewById,
   postReview,
+  postReviewDislike,
+  postReviewLike,
 } from '../controller/reviewsController';
 import {validationErrorHandler} from '../middlewares/errorHandlers';
 import {body, param} from 'express-validator';
@@ -47,6 +50,30 @@ router.post(
     .withMessage('Comment must be a string and is required'),
   validationErrorHandler,
   postReview,
+);
+
+router.delete(
+  '/:id',
+  userAuthenticator,
+  param('id').isNumeric().withMessage('Review id must be a number'),
+  validationErrorHandler,
+  deleteReviewById,
+);
+
+router.post(
+  '/:id/like',
+  userAuthenticator,
+  param('id').isNumeric().withMessage('Review id must be a number'),
+  validationErrorHandler,
+  postReviewLike,
+);
+
+router.post(
+  '/:id/dislike',
+  userAuthenticator,
+  param('id').isNumeric().withMessage('Review id must be a number'),
+  validationErrorHandler,
+  postReviewDislike,
 );
 
 export default router;

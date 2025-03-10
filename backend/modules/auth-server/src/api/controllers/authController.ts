@@ -68,6 +68,8 @@ const registerUser = async (
     const user = req.body;
     user.password = await bcrypt.hash(user.password, salt);
 
+    user.role = 'user';
+
     const createdUser = await createUser(user);
 
     if (!createdUser) {

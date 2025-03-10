@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import api from './api'; // Imports /api/index.ts
+import morgan from 'morgan';
+import helmet from 'helmet';
 
 import {
   errorHandler,
@@ -9,7 +11,10 @@ import {
 
 const app = express();
 
+app.use(morgan('dev'));
+app.use(helmet());
 app.use(cors());
+
 app.use(express.json());
 
 // public folder for api documentation

@@ -1,22 +1,17 @@
 import express from 'express';
 import cors from 'cors';
-
+import morgan from 'morgan';
+import helmet from 'helmet';
 import api from './api'; // Imports /api/index.ts
 import {
   errorHandler,
   notFoundErrorHandler,
 } from './api/middlewares/errorHandlers';
 
-// Load environment variables
-// dotenv.config();
-
-// Should we use morgan? Find out more at https://www.npmjs.com/package/morgan
-// app.use(morgan('dev'));
-
-// Should we use helmet? Find out more at https://www.npmjs.com/package/helmet
-
 const app = express();
 
+app.use(morgan('dev'));
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 

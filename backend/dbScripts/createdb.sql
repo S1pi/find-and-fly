@@ -49,8 +49,6 @@ CREATE TABLE reviews (
   rating INT CHECK (rating BETWEEN 1 AND 5),
   trip_type ENUM('solo', 'couple', 'family', 'friends', 'business', 'other'),
   comment TEXT,
-  likes INT DEFAULT 0,
-  dislikes INT DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE
@@ -74,5 +72,6 @@ CREATE TABLE review_actions (
   reaction ENUM('like', 'dislike') NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-  FOREIGN KEY (review_id) REFERENCES reviews(id) ON DELETE CASCADE
+  FOREIGN KEY (review_id) REFERENCES reviews(id) ON DELETE CASCADE,
+  UNIQUE (user_id, review_id)
 );

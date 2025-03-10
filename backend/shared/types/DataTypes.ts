@@ -49,6 +49,20 @@ type SubDestinationCreate = Omit<
   user_id?: number;
 };
 
+type Review = {
+  id: number;
+  user_id: number;
+  destination_id: number;
+  rating: number;
+  trip_type: string;
+  comment: string;
+  likes: number;
+  dislikes: number;
+  created_at: Date | string;
+};
+
+type ReviewCreate = Omit<Review, 'id' | 'created_at' | 'likes' | 'dislikes'>;
+
 export type {
   User,
   UserWithoutPassword,
@@ -58,4 +72,6 @@ export type {
   DestinationCreate,
   SubDestination,
   SubDestinationCreate,
+  Review,
+  ReviewCreate,
 };

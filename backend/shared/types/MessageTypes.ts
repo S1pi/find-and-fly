@@ -1,4 +1,9 @@
-import {Destination, SubDestination, UserWithoutPassword} from './DataTypes';
+import {
+  Destination,
+  Review,
+  SubDestination,
+  UserWithoutPassword,
+} from './DataTypes';
 
 type MessageResponse = {
   message: string;
@@ -29,6 +34,11 @@ type DeleteDestinationMessage = MessageResponse & {
   destination_id: number;
 };
 
+type CreatedReviewMessage = MessageResponse & {
+  review_id: number;
+  review: Review;
+};
+
 export type {
   MessageResponse,
   ErrorResponse,
@@ -36,4 +46,5 @@ export type {
   UserDeleteResponse,
   CreatedDestinationMessage,
   DeleteDestinationMessage,
+  CreatedReviewMessage,
 };

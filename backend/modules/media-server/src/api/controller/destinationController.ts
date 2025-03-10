@@ -23,7 +23,7 @@ const getAllDestinations = async (
   }
 };
 
-const getDestinatioById = async (
+const getDestinationById = async (
   req: Request<{id: string}>,
   res: Response,
   next: NextFunction,
@@ -89,7 +89,7 @@ const deleteDestinationById = async (
 
 export {
   getAllDestinations,
-  getDestinatioById,
+  getDestinationById,
   postDestination,
   deleteDestinationById,
 };

@@ -3,7 +3,7 @@ import {validationErrorHandler} from '../middlewares/errorHandlers';
 import {
   deleteDestinationById,
   getAllDestinations,
-  getDestinatioById,
+  getDestinationById,
   postDestination,
 } from '../controller/destinationController';
 import userAuthenticator from '../middlewares/authentication';
@@ -20,7 +20,7 @@ router.get(
   '/:id',
   param('id').isNumeric().withMessage('Id needs to be number'),
   validationErrorHandler,
-  getDestinatioById,
+  getDestinationById,
 );
 
 router.post(

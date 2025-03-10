@@ -1,4 +1,4 @@
-import {Destination, UserWithoutPassword} from './DataTypes';
+import {Destination, SubDestination, UserWithoutPassword} from './DataTypes';
 
 type MessageResponse = {
   message: string;
@@ -20,8 +20,9 @@ type UserDeleteResponse = {
 
 type CreatedDestinationMessage = {
   message: string;
-  destination_id: number;
-  destination: Destination;
+  destination_id?: number;
+  subDestination_id?: number;
+  destination: Destination | SubDestination;
 };
 
 type DeleteDestinationMessage = MessageResponse & {

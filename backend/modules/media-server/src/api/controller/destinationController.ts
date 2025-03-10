@@ -69,8 +69,6 @@ const deleteDestinationById = async (
   try {
     const destinationId = req.params.id;
 
-    const destination = await getDestinationFromId(Number(destinationId));
-
     const user = req.user;
 
     if (!user) {
@@ -78,12 +76,12 @@ const deleteDestinationById = async (
     }
 
     if (user.role !== 'admin') {
-      throw new CustomError('Only admin can delete destinations', 401);
+      throw new CustomError('Only admin can delete destinations', 403);
     }
 
     const deletedDestination = await deleteDestination(Number(destinationId));
 
-    res.status(200).json({message: 'Destination deleted'});
+    res.status(200).json(deletedDestination);
   } catch (err) {
     next(err);
   }

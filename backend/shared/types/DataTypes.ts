@@ -37,8 +37,16 @@ type SubDestination = {
   destination_id: number;
   name: string;
   description: string;
+  rating: number;
   user_id: number;
   created_at: Date | string;
+};
+
+type SubDestinationCreate = Omit<
+  SubDestination,
+  'id' | 'created_at' | 'user_id'
+> & {
+  user_id?: number;
 };
 
 export type {
@@ -49,4 +57,5 @@ export type {
   Destination,
   DestinationCreate,
   SubDestination,
+  SubDestinationCreate,
 };

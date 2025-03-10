@@ -58,7 +58,7 @@ const createDestination = async (
 
   return {
     message: 'Destination created successfully',
-    destination_id: result.insertId,
+    subDestination_id: result.insertId,
     destination: newDestination,
   };
 };

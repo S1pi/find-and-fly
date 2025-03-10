@@ -75,4 +75,4 @@ typings/
 
 dist
 public/*
-uploads/*
+uploads

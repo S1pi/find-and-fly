@@ -1,6 +1,11 @@
 import promisePool from 'shared/database/connection';
 import CustomError from 'utils/CustomError';
-import {Destination, DestinationCreate, FileData} from 'types/DataTypes';
+import {
+  Destination,
+  DestinationCreate,
+  DestinationWithFileData,
+  FileData,
+} from 'types/DataTypes';
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
 import {
   CreatedDestinationMessage,
@@ -14,6 +19,24 @@ const getDestinationList = async (): Promise<Destination[]> => {
   const [rows] = await promisePool.execute<RowDataPacket[] & Destination[]>(
     query,
   );
+
+  if (rows.length === 0) {
+    throw new CustomError('No destinations found', 404);
+  }
+
+  return rows;
+};
+
+const getDestinationListWithFileData = async (): Promise<
+  DestinationWithFileData[]
+> => {
+  const query = `SELECT destinations.*, files.file_name, files.file_url
+  FROM destinations
+  LEFT JOIN files ON destinations.id = files.target_id AND files.target_type = 'destination'`;
+
+  const [rows] = await promisePool.execute<
+    RowDataPacket[] & DestinationWithFileData[]
+  >(query);
 
   if (rows.length === 0) {
     throw new CustomError('No destinations found', 404);
@@ -106,6 +129,7 @@ const deleteDestination = async (
 
 export {
   getDestinationList,
+  getDestinationListWithFileData,
   getDestinationFromId,
   createDestination,
   deleteDestination,

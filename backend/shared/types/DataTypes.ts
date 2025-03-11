@@ -28,6 +28,11 @@ type Destination = {
   category_id: number;
 };
 
+type DestinationWithFileData = Destination & {
+  file_name: string;
+  file_url: string;
+};
+
 type DestinationCreate = Omit<Destination, 'id' | 'created_at' | 'user_id'> & {
   user_id?: number;
   file_data?: FileData;
@@ -83,6 +88,7 @@ export type {
   UserCreate,
   TokenData,
   Destination,
+  DestinationWithFileData,
   DestinationCreate,
   SubDestination,
   SubDestinationCreate,

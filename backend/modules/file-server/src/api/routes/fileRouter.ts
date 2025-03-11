@@ -9,7 +9,7 @@ const router = express.Router();
 const storage = multer.diskStorage({
   destination: './uploads',
   filename: (req, file, cb) => {
-    const userId = req.user?.id;
+    const userId = req.user?.username;
     const fileExtension = file.originalname.split('.').pop();
     const createFilename = `${userId}-${Date.now()}.${fileExtension}`;
     cb(null, createFilename);
@@ -36,10 +36,10 @@ const makeUpload = (
 
     if (req.file && req.file.mimetype.includes('image')) {
       console.log('Ollaan ttällä');
-      next();
+      return next();
     }
 
-    next(new CustomError('Invalid file type', 400));
+    return next(new CustomError('Invalid file type', 400));
   });
 };
 

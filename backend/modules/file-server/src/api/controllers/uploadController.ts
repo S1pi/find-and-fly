@@ -40,6 +40,9 @@ const uploadFile = (
     }
 
     // Kato miten tää pitää toteuttaa verrattuna ilen versioon
+    // This is for sending the file name and other details to the media server
+    // check what you need to send to the media server
+
     const response: UploadResponse = {
       message: 'File uploaded',
       file_name: req.file.filename,

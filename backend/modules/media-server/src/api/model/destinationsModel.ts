@@ -1,11 +1,12 @@
 import promisePool from 'shared/database/connection';
 import CustomError from 'utils/CustomError';
-import {Destination, DestinationCreate} from 'types/DataTypes';
+import {Destination, DestinationCreate, FileData} from 'types/DataTypes';
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
 import {
   CreatedDestinationMessage,
   DeleteDestinationMessage,
 } from 'types/MessageTypes';
+import {addFileData} from './mediaModel';
 
 const getDestinationList = async (): Promise<Destination[]> => {
   const query = 'SELECT * FROM destinations';
@@ -55,6 +56,24 @@ const createDestination = async (
   }
 
   const newDestination = await getDestinationFromId(result.insertId);
+
+  // Add destination file data
+  const fileData = {
+    user_id: destination.user_id,
+    target_type: 'destination',
+    target_id: result.insertId,
+    file_name: destination.file_data?.file_name,
+    file_url: destination.file_data?.file_url,
+  };
+
+  try {
+    const fileResponse = await addFileData(fileData);
+
+    console.log(fileResponse);
+  } catch (err) {
+    console.log('Error adding file data', err);
+    throw new CustomError('Error adding file data', 500);
+  }
 
   return {
     message: 'Destination created successfully',

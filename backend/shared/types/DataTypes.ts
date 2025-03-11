@@ -30,6 +30,7 @@ type Destination = {
 
 type DestinationCreate = Omit<Destination, 'id' | 'created_at' | 'user_id'> & {
   user_id?: number;
+  file_data?: FileData;
 };
 
 type SubDestination = {
@@ -71,6 +72,11 @@ type ReviewAction = {
   created_at: Date | string;
 };
 
+type FileData = {
+  file_name: string;
+  file_url: string;
+};
+
 export type {
   User,
   UserWithoutPassword,
@@ -83,4 +89,5 @@ export type {
   Review,
   ReviewCreate,
   ReviewAction,
+  FileData,
 };

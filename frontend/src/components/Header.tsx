@@ -1,16 +1,20 @@
-import {useEffect, useState} from 'react';
+import {use, useEffect, useState} from 'react';
 import BaseBtn from './buttons/BaseBtn';
 import {MdOutlineLanguage} from 'react-icons/md';
 import {FaStar} from 'react-icons/fa';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {IoMdClose} from 'react-icons/io';
 import useHamburgerMenu from '../hooks/useHamburgerMenu';
+import {useNavigate} from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 const Header = () => {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  // const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const {user, handleAutoLogin} = useAuth();
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(window.innerWidth);
   const {isOpen, toggleMenu} = useHamburgerMenu();
+  const navigation = useNavigate();
   // md = 768px muuttuu isSmallScreenksi
 
   useEffect(() => {
@@ -32,6 +36,12 @@ const Header = () => {
       setIsSmallScreen(false);
     }
   }, [width]);
+
+  useEffect(() => {
+    if (!user) {
+      handleAutoLogin();
+    }
+  }, []);
 
   return (
     <div className='relative flex h-22 w-full items-center justify-center bg-primary px-2'>
@@ -67,17 +77,21 @@ const Header = () => {
         </>
       ) : (
         <>
-          {loggedIn ? (
+          {user ? (
             <BaseBtn
               className='absolute right-2 smd:right-14 lg:right-26'
-              onClick={() => {}}
+              onClick={() => {
+                navigation('/profile');
+              }}
             >
               Profile
             </BaseBtn>
           ) : (
             <BaseBtn
               className='absolute right-2 smd:right-14 lg:right-26'
-              onClick={() => {}}
+              onClick={() => {
+                navigation('/login');
+              }}
             >
               Login
             </BaseBtn>

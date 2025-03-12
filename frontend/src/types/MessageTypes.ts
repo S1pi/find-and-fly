@@ -2,6 +2,7 @@ import {
   Destination,
   Review,
   SubDestination,
+  TokenData,
   UserWithoutPassword,
 } from './DataTypes';
 
@@ -43,6 +44,17 @@ type DeleteReviewMessage = MessageResponse & {
   review_id: number;
 };
 
+type LoginResponse = {
+  message: string;
+  token: string;
+  user: UserWithoutPassword;
+};
+
+type UserResponse = {
+  message: string;
+  userData: UserWithoutPassword;
+};
+
 export type {
   MessageResponse,
   ErrorResponse,
@@ -50,6 +62,8 @@ export type {
   UserDeleteResponse,
   CreatedDestinationMessage,
   DeleteDestinationMessage,
+  LoginResponse,
   CreatedReviewMessage,
   DeleteReviewMessage,
+  UserResponse,
 };

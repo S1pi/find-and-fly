@@ -4,7 +4,7 @@ import SortCard from '../components/cards/SortCard';
 import Header from '../components/Header';
 import ProfileSidebar from '../components/ProfileSidebar';
 import {useDestinations} from '../hooks/apiHooks';
-import {Destination, DestinationWithFileData} from '../types/DataTypes';
+import {DestinationWithFileData} from '../types/DataTypes';
 
 const Home = () => {
   const {destinations} = useDestinations();

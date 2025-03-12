@@ -45,7 +45,7 @@ const uploadFile = (
       file_name: req.file.filename,
       target_type: 'user',
       target_id: req.user?.id || 0,
-      file_url: `uploads/${req.file.filename}`,
+      file_url: `http://localhost:3003/uploads/${req.file.filename}`,
     };
 
     res.status(201).json(response);

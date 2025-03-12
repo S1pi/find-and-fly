@@ -1,5 +1,5 @@
 import DestinationCard from '../components/cards/DestinationCard';
-// import SortCard from '../components/cards/SortCard';
+import SortCard from '../components/cards/SortCard';
 import Header from '../components/Header';
 import ProfileSidebar from '../components/ProfileSidebar';
 

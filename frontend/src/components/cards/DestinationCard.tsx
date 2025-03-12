@@ -1,26 +1,30 @@
-import {IoIosStar} from 'react-icons/io'; // Filled star icon
-import {IoIosStarOutline} from 'react-icons/io'; // Empty star icon
+// import {IoIosStar} from 'react-icons/io'; // Filled star icon
+// import {IoIosStarOutline} from 'react-icons/io'; // Empty star icon
 import {BiDotsVerticalRounded} from 'react-icons/bi';
 import {IoLocationSharp} from 'react-icons/io5';
 import {MdReport} from 'react-icons/md';
-import {DestinationWithFileData} from '../../types/DataTypes';
+import {DestinationDataWithRating} from '../../types/DataTypes';
+import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
 
 type DestinationCardProps = {
-  destination: DestinationWithFileData;
-  setSelectedItem: (destination: DestinationWithFileData) => void;
+  destination: DestinationDataWithRating;
+  setSelectedItem: (destination: DestinationDataWithRating) => void;
 };
 
 const DestinationCard = (props: DestinationCardProps) => {
   const {destination} = props;
 
-  console.log(destination.file_url);
+  console.log(typeof destination.average_rating);
   return (
     // Basic container for a destination card
     <div className='h-74 w-44 overflow-hidden rounded-lg drop-shadow-lg'>
       {/* Container for image */}
       {/* <div className="flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('/img/landscape-3846391_1280.jpg')] bg-cover bg-center px-2"> */}
       <div
-        className={`bg-[url('${destination.file_url}')] flex h-3/4 w-full flex-col justify-between rounded-t-lg bg-cover bg-center px-2`}
+        className={`flex h-3/4 w-full flex-col justify-between rounded-t-lg bg-cover bg-center px-2`}
+        style={{
+          backgroundImage: `url(${destination.file_url})`, // Image URL
+        }}
       >
         {/* Container for buttons */}
         <div className='flex h-10 w-full items-center justify-between'>
@@ -37,11 +41,11 @@ const DestinationCard = (props: DestinationCardProps) => {
           </div>
         </div>
         <div>
-          <h3 className='text-h3 font-semibold text-primary drop-shadow-text'>
-            Bali
+          <h3 className='text-h3 font-semibold text-gold-accent drop-shadow-text'>
+            {destination.name}
           </h3>
           <p className='mb-2 text-base text-primary drop-shadow-text'>
-            Base description of the place.
+            {destination.description}
           </p>
         </div>
       </div>
@@ -50,14 +54,22 @@ const DestinationCard = (props: DestinationCardProps) => {
         className='h-1/4 cursor-pointer rounded-b-lg bg-primary p-2'
         onClick={() => alert('Card clicked')}
       >
-        <h3 className='text-h3 font-semibold text-secondary'>Bali</h3>
+        <h3 className='text-h3 font-semibold text-secondary'>
+          {destination.country}
+        </h3>
         {/* Change stars to generate depending on the rating */}
         <div id='starContainer' className='flex'>
-          <IoIosStar className='text-h3 text-blue-btn' />
-          <IoIosStar className='text-h3 text-blue-btn' />
-          <IoIosStar className='text-h3 text-blue-btn' />
-          <IoIosStar className='text-h3 text-blue-btn' />
-          <IoIosStarOutline className='text-h3 text-secondary' />
+          <Rating
+            style={{maxWidth: 150, marginBottom: 10}}
+            value={destination.average_rating}
+            itemStyles={{
+              itemShapes: ThinRoundedStar,
+              activeFillColor: '#38a2bc',
+              activeStrokeColor: '#1a2e40',
+              inactiveFillColor: '#b1cac9',
+            }}
+            readOnly
+          />
         </div>
       </div>
     </div>

@@ -5,7 +5,8 @@ import {
   deleteDestination,
   getDestinationFromId,
   getDestinationList,
-  getDestinationListWithFileData,
+  getDestinationListWithAllData,
+  // getDestinationListWithFileData,
 } from '../model/destinationsModel';
 import {Destination, DestinationCreate} from 'types/DataTypes';
 import {CreatedDestinationMessage} from 'types/MessageTypes';
@@ -17,7 +18,7 @@ const getAllDestinations = async (
 ): Promise<void> => {
   try {
     // const destinationList = await getDestinationList();
-    const destinationList = await getDestinationListWithFileData();
+    const destinationList = await getDestinationListWithAllData();
 
     res.status(200).json(destinationList);
   } catch (err) {
@@ -62,6 +63,11 @@ const postDestination = async (
     next(err);
   }
 };
+
+// const getDestinationRating = async (
+//   req: Request<{id: string}>,
+//   res: Response,
+// ) => {};
 
 const deleteDestinationById = async (
   req: Request<{id: string}>,

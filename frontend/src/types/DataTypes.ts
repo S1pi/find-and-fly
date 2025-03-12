@@ -80,6 +80,10 @@ type FileData = {
   file_url: string;
 };
 
+type DestinationDataWithRating = DestinationWithFileData & {
+  average_rating: number;
+};
+
 export type {
   User,
   UserWithoutPassword,
@@ -87,6 +91,7 @@ export type {
   TokenData,
   Destination,
   DestinationWithFileData,
+  DestinationDataWithRating,
   DestinationCreate,
   SubDestination,
   SubDestinationCreate,

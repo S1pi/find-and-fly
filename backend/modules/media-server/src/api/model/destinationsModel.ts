@@ -3,6 +3,7 @@ import CustomError from 'utils/CustomError';
 import {
   Destination,
   DestinationCreate,
+  DestinationDataWithRating,
   DestinationWithFileData,
   FileData,
 } from 'types/DataTypes';
@@ -27,15 +28,60 @@ const getDestinationList = async (): Promise<Destination[]> => {
   return rows;
 };
 
-const getDestinationListWithFileData = async (): Promise<
-  DestinationWithFileData[]
+// const getDestinationAverageRating = async () => {
+//   const query = `SELECT destinations.id, destinations.name, destinations.country, destinations.description, destinations.category_id, AVG(reviews.rating) AS average_rating
+//   FROM destinations
+//   LEFT JOIN reviews ON destinations.id = reviews.destination_id
+//   GROUP BY destinations.id`;
+
+//   const [rows] = await promisePool.execute<RowDataPacket[] & Destination[]>(
+//     query,
+//   );
+
+//   if (rows.length === 0) {
+//     throw new CustomError('No destinations found', 404);
+//   }
+
+//   return rows;
+// };
+
+// const getDestinationListWithFileData = async (): Promise<
+//   DestinationWithFileData[]
+// > => {
+//   const query = `SELECT destinations.*, files.file_name, files.file_url
+//   FROM destinations
+//   LEFT JOIN files ON destinations.id = files.target_id AND files.target_type = 'destination'`;
+
+//   const [rows] = await promisePool.execute<
+//     RowDataPacket[] & DestinationWithFileData[]
+//   >(query);
+
+//   if (rows.length === 0) {
+//     throw new CustomError('No destinations found', 404);
+//   }
+
+//   return rows;
+// };
+
+const getDestinationListWithAllData = async (): Promise<
+  DestinationDataWithRating[]
 > => {
-  const query = `SELECT destinations.*, files.file_name, files.file_url
-  FROM destinations
-  LEFT JOIN files ON destinations.id = files.target_id AND files.target_type = 'destination'`;
+  const query = `SELECT 
+  d.id,
+  d.name,
+  d.country,
+  d.description,
+  d.category_id,
+  COALESCE(CAST(ROUND(AVG(r.rating), 0) AS SIGNED), 0) AS average_rating,
+  f.file_name,
+  f.file_url
+FROM destinations d
+LEFT JOIN reviews r ON d.id = r.destination_id
+LEFT JOIN files f ON d.id = f.target_id AND f.target_type = 'destination'
+GROUP BY d.id, f.file_name, f.file_url;`;
 
   const [rows] = await promisePool.execute<
-    RowDataPacket[] & DestinationWithFileData[]
+    RowDataPacket[] & DestinationDataWithRating[]
   >(query);
 
   if (rows.length === 0) {
@@ -129,7 +175,8 @@ const deleteDestination = async (
 
 export {
   getDestinationList,
-  getDestinationListWithFileData,
+  // getDestinationListWithFileData,
+  getDestinationListWithAllData,
   getDestinationFromId,
   createDestination,
   deleteDestination,

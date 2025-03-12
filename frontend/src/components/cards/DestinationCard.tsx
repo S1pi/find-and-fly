@@ -20,7 +20,7 @@ const DestinationCard = (props: DestinationCardProps) => {
       {/* Container for image */}
       {/* <div className="flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('/img/landscape-3846391_1280.jpg')] bg-cover bg-center px-2"> */}
       <div
-        className={`flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('${destination.file_url}')] bg-cover bg-center px-2`}
+        className={`bg-[url('${destination.file_url}')] flex h-3/4 w-full flex-col justify-between rounded-t-lg bg-cover bg-center px-2`}
       >
         {/* Container for buttons */}
         <div className='flex h-10 w-full items-center justify-between'>

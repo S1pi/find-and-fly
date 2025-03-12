@@ -2,7 +2,7 @@ import {createContext, useState} from 'react';
 import {AuthContextType, Credentials} from '../types/UserTypes';
 import {UserWithoutPassword} from '../types/DataTypes';
 import {useAuthentication, useUser} from '../hooks/apiHooks';
-import {useLocation, useNavigate, useNavigation} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

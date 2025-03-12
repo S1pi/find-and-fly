@@ -72,27 +72,6 @@ const Home = () => {
             {/* <div className='h-[3px] w-full bg-amber-950'></div> */}
             {/* h-[530px] */}
             <div className='scrollbar-hide m-auto mt-4 flex flex-wrap justify-evenly gap-4'>
-              {/* <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
-              <DestinationCard /> */}
               {destinations.map((destination) => (
                 <DestinationCard
                   key={destination.id}

@@ -3,6 +3,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import '@smastrom/react-rating/style.css';
 import {BrowserRouter, Route, Routes} from 'react-router';
+import Profile from './views/Profile';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/profile' element={<Profile />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

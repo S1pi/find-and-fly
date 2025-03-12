@@ -1,11 +1,17 @@
 import promisePool from 'shared/database/connection';
 import CustomError from 'utils/CustomError';
-import {Destination, DestinationCreate} from 'types/DataTypes';
+import {
+  Destination,
+  DestinationCreate,
+  DestinationWithFileData,
+  FileData,
+} from 'types/DataTypes';
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
 import {
   CreatedDestinationMessage,
   DeleteDestinationMessage,
 } from 'types/MessageTypes';
+import {addFileData} from './mediaModel';
 
 const getDestinationList = async (): Promise<Destination[]> => {
   const query = 'SELECT * FROM destinations';
@@ -13,6 +19,24 @@ const getDestinationList = async (): Promise<Destination[]> => {
   const [rows] = await promisePool.execute<RowDataPacket[] & Destination[]>(
     query,
   );
+
+  if (rows.length === 0) {
+    throw new CustomError('No destinations found', 404);
+  }
+
+  return rows;
+};
+
+const getDestinationListWithFileData = async (): Promise<
+  DestinationWithFileData[]
+> => {
+  const query = `SELECT destinations.*, files.file_name, files.file_url
+  FROM destinations
+  LEFT JOIN files ON destinations.id = files.target_id AND files.target_type = 'destination'`;
+
+  const [rows] = await promisePool.execute<
+    RowDataPacket[] & DestinationWithFileData[]
+  >(query);
 
   if (rows.length === 0) {
     throw new CustomError('No destinations found', 404);
@@ -56,6 +80,24 @@ const createDestination = async (
 
   const newDestination = await getDestinationFromId(result.insertId);
 
+  // Add destination file data
+  const fileData = {
+    user_id: destination.user_id,
+    target_type: 'destination',
+    target_id: result.insertId,
+    file_name: destination.file_data?.file_name,
+    file_url: destination.file_data?.file_url,
+  };
+
+  try {
+    const fileResponse = await addFileData(fileData);
+
+    console.log(fileResponse);
+  } catch (err) {
+    console.log('Error adding file data', err);
+    throw new CustomError('Error adding file data', 500);
+  }
+
   return {
     message: 'Destination created successfully',
     subDestination_id: result.insertId,
@@ -87,6 +129,7 @@ const deleteDestination = async (
 
 export {
   getDestinationList,
+  getDestinationListWithFileData,
   getDestinationFromId,
   createDestination,
   deleteDestination,

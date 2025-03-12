@@ -1,9 +1,17 @@
+import {useState} from 'react';
 import DestinationCard from '../components/cards/DestinationCard';
 import SortCard from '../components/cards/SortCard';
 import Header from '../components/Header';
 import ProfileSidebar from '../components/ProfileSidebar';
+import {useDestinations} from '../hooks/apiHooks';
+import {Destination, DestinationWithFileData} from '../types/DataTypes';
 
 const Home = () => {
+  const {destinations} = useDestinations();
+  const [selectedItem, setSelectedItem] = useState<
+    DestinationWithFileData | undefined
+  >(undefined);
+
   return (
     <>
       <Header />
@@ -64,6 +72,7 @@ const Home = () => {
             {/* <div className='h-[3px] w-full bg-amber-950'></div> */}
             {/* h-[530px] */}
             <div className='scrollbar-hide m-auto mt-4 flex flex-wrap justify-evenly gap-4'>
+              {/* <DestinationCard />
               <DestinationCard />
               <DestinationCard />
               <DestinationCard />
@@ -83,8 +92,14 @@ const Home = () => {
               <DestinationCard />
               <DestinationCard />
               <DestinationCard />
-              <DestinationCard />
-              <DestinationCard />
+              <DestinationCard /> */}
+              {destinations.map((destination) => (
+                <DestinationCard
+                  key={destination.id}
+                  destination={destination}
+                  setSelectedItem={setSelectedItem}
+                />
+              ))}
             </div>
           </div>
         </div>

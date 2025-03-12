@@ -12,8 +12,8 @@ import {
 const app = express();
 
 app.use(morgan('dev'));
-app.use(helmet());
-app.use(cors());
+app.use(helmet({contentSecurityPolicy: false}));
+app.use(cors({origin: '*'}));
 
 app.use(express.json());
 

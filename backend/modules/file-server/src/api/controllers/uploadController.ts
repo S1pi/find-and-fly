@@ -1,7 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
 import CustomError from 'utils/CustomError';
-
-import fs from 'fs';
 import {MessageResponse} from 'types/MessageTypes';
 
 // Ilen versio
@@ -17,8 +15,6 @@ import {MessageResponse} from 'types/MessageTypes';
 // Mun versio oman tietokannan mukaisesti (varmista miten toimii)
 type UploadResponse = MessageResponse & {
   file_name: string;
-  target_type: string;
-  target_id: number;
   file_url: string;
 };
 
@@ -40,11 +36,12 @@ const uploadFile = (
     }
 
     // Kato miten tää pitää toteuttaa verrattuna ilen versioon
+    // This is for sending the file name and other details to the media server
+    // check what you need to send to the media server
+
     const response: UploadResponse = {
       message: 'File uploaded',
       file_name: req.file.filename,
-      target_type: 'user',
-      target_id: req.user?.id || 0,
       file_url: `http://localhost:3003/uploads/${req.file.filename}`,
     };
 

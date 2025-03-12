@@ -1,5 +1,3 @@
-import {Request} from 'express';
-
 type User = {
   id: number;
   username: string;

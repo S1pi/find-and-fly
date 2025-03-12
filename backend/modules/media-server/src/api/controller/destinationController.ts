@@ -5,6 +5,7 @@ import {
   deleteDestination,
   getDestinationFromId,
   getDestinationList,
+  getDestinationListWithFileData,
 } from '../model/destinationsModel';
 import {Destination, DestinationCreate} from 'types/DataTypes';
 import {CreatedDestinationMessage} from 'types/MessageTypes';
@@ -15,7 +16,8 @@ const getAllDestinations = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const destinationList = await getDestinationList();
+    // const destinationList = await getDestinationList();
+    const destinationList = await getDestinationListWithFileData();
 
     res.status(200).json(destinationList);
   } catch (err) {

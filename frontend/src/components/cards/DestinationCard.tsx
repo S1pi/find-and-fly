@@ -3,67 +3,66 @@ import {IoIosStarOutline} from 'react-icons/io'; // Empty star icon
 import {BiDotsVerticalRounded} from 'react-icons/bi';
 import {IoLocationSharp} from 'react-icons/io5';
 import {MdReport} from 'react-icons/md';
+import {DestinationWithFileData} from '../../types/DataTypes';
 
-const DestinationCard =
-  () => {
-    return (
-      // Basic container for a destination card
-      <div className="h-74 w-44 drop-shadow-lg rounded-lg overflow-hidden">
-        {/* Container for image */}
-        <div className="bg-[url('/img/landscape-3846391_1280.jpg')] bg-cover bg-center rounded-t-lg h-3/4 px-2 flex flex-col justify-between">
-          {/* Container for buttons */}
-          <div className="flex h-10 w-full justify-between items-center">
-            <button className="rounded-full bg-lightgrey w-6 h-6 flex justify-center items-center drop-shadow-sm cursor-pointer">
-              <BiDotsVerticalRounded className="text-h4 p-0" />
+type DestinationCardProps = {
+  destination: DestinationWithFileData;
+  setSelectedItem: (destination: DestinationWithFileData) => void;
+};
+
+const DestinationCard = (props: DestinationCardProps) => {
+  const {destination} = props;
+
+  console.log(destination.file_url);
+  return (
+    // Basic container for a destination card
+    <div className='h-74 w-44 overflow-hidden rounded-lg drop-shadow-lg'>
+      {/* Container for image */}
+      {/* <div className="flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('/img/landscape-3846391_1280.jpg')] bg-cover bg-center px-2"> */}
+      <div
+        className={`flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('${destination.file_url}')] bg-cover bg-center px-2`}
+      >
+        {/* Container for buttons */}
+        <div className='flex h-10 w-full items-center justify-between'>
+          <button className='flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-lightgrey drop-shadow-sm'>
+            <BiDotsVerticalRounded className='p-0 text-h4' />
+          </button>
+          <div className='flex gap-1'>
+            <button className='flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-lightgrey drop-shadow-sm'>
+              <IoLocationSharp className='text-h4' />
             </button>
-            <div className="flex gap-1">
-              <button className="rounded-full bg-lightgrey w-6 h-6 flex justify-center items-center drop-shadow-sm cursor-pointer">
-                <IoLocationSharp className="text-h4" />
-              </button>
-              <button className="rounded-full bg-lightgrey w-6 h-6 flex justify-center items-center drop-shadow-sm cursor-pointer">
-                <MdReport className="text-h4" />
-              </button>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-h3 font-semibold text-primary drop-shadow-text">
-              Bali
-            </h3>
-            <p className="text-base mb-2 text-primary drop-shadow-text">
-              Base
-              description
-              of the
-              place.
-            </p>
+            <button className='flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-lightgrey drop-shadow-sm'>
+              <MdReport className='text-h4' />
+            </button>
           </div>
         </div>
-
-        <div
-          className="h-1/4 bg-primary rounded-b-lg p-2 cursor-pointer"
-          onClick={() =>
-            alert(
-              'Card clicked',
-            )
-          }
-        >
-          <h3 className="text-h3 text-secondary font-semibold">
+        <div>
+          <h3 className='text-h3 font-semibold text-primary drop-shadow-text'>
             Bali
           </h3>
-          {/* Change stars to generate depending on the rating */}
-          <div
-            id="starContainer"
-            className="flex"
-          >
-            <IoIosStar className="text-h3 text-blue-btn" />
-            <IoIosStar className="text-h3 text-blue-btn" />
-            <IoIosStar className="text-h3 text-blue-btn" />
-            <IoIosStar className="text-h3 text-blue-btn" />
-            <IoIosStarOutline className="text-h3 text-secondary" />
-          </div>
+          <p className='mb-2 text-base text-primary drop-shadow-text'>
+            Base description of the place.
+          </p>
         </div>
       </div>
-    );
-  };
+
+      <div
+        className='h-1/4 cursor-pointer rounded-b-lg bg-primary p-2'
+        onClick={() => alert('Card clicked')}
+      >
+        <h3 className='text-h3 font-semibold text-secondary'>Bali</h3>
+        {/* Change stars to generate depending on the rating */}
+        <div id='starContainer' className='flex'>
+          <IoIosStar className='text-h3 text-blue-btn' />
+          <IoIosStar className='text-h3 text-blue-btn' />
+          <IoIosStar className='text-h3 text-blue-btn' />
+          <IoIosStar className='text-h3 text-blue-btn' />
+          <IoIosStarOutline className='text-h3 text-secondary' />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default DestinationCard;
 

@@ -12,8 +12,13 @@ import {
 const app = express();
 
 app.use(morgan('dev'));
-app.use(helmet());
-app.use(cors());
+// app.use(helmet({contentSecurityPolicy: false}));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: {policy: 'cross-origin'},
+  }),
+);
+app.use(cors({origin: '*'}));
 app.use(express.json());
 
 app.use('/uploads', express.static('uploads'));

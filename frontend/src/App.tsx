@@ -4,6 +4,7 @@ import Login from './views/Login';
 import '@smastrom/react-rating/style.css';
 import {BrowserRouter, Route, Routes} from 'react-router';
 import Profile from './views/Profile';
+import ReviewAdd from './views/ReviewAdd';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/review/add' element={<ReviewAdd />} />
+            <Route path='*' element={<div>404</div>} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

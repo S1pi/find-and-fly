@@ -1,8 +1,11 @@
 import BaseBtn from './buttons/BaseBtn';
 import {FaUserCog} from 'react-icons/fa';
 import {IoIosStar} from 'react-icons/io'; // Filled star icon
+import {useNavigate} from 'react-router';
 
 const ProfileSidebar = () => {
+  const navigation = useNavigate();
+
   return (
     <div className='absolute ml-sidebarMargin flex h-screenWithoutHeader w-sidebar flex-col shadow-sidebar'>
       <div className='relative flex-2 bg-[url("/img/depositphotos_53489917-stock-photo-vertical-landscape-view-of-mountain.jpg")] bg-cover bg-center'>
@@ -23,7 +26,7 @@ const ProfileSidebar = () => {
         <div className='mt-12 mb-2 flex space-x-2'>
           <BaseBtn
             className='!px-0 text-button drop-shadow-md'
-            onClick={() => {}}
+            onClick={() => navigation('/review/add')}
           >
             Add Review
           </BaseBtn>

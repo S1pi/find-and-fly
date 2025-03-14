@@ -3,6 +3,7 @@ import CustomError from 'utils/CustomError';
 import {
   createDestination,
   deleteDestination,
+  getCategoryList,
   getDestinationFromId,
   getDestinationList,
   getDestinationListWithAllData,
@@ -95,9 +96,24 @@ const deleteDestinationById = async (
   }
 };
 
+const getCategories = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const categoryList = await getCategoryList();
+
+    res.status(200).json(categoryList);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export {
   getAllDestinations,
   getDestinationById,
   postDestination,
   deleteDestinationById,
+  getCategories,
 };

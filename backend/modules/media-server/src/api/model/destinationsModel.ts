@@ -1,6 +1,7 @@
 import promisePool from 'shared/database/connection';
 import CustomError from 'utils/CustomError';
 import {
+  Category,
   Destination,
   DestinationCreate,
   DestinationDataWithRating,
@@ -173,6 +174,18 @@ const deleteDestination = async (
   }
 };
 
+const getCategoryList = async (): Promise<Category[]> => {
+  const query = 'SELECT * FROM categories';
+
+  const [rows] = await promisePool.execute<RowDataPacket[] & Category[]>(query);
+
+  if (rows.length === 0) {
+    throw new CustomError('No categories found', 404);
+  }
+
+  return rows;
+};
+
 export {
   getDestinationList,
   // getDestinationListWithFileData,
@@ -180,4 +193,5 @@ export {
   getDestinationFromId,
   createDestination,
   deleteDestination,
+  getCategoryList,
 };

@@ -3,6 +3,7 @@ import {validationErrorHandler} from '../middlewares/errorHandlers';
 import {
   deleteDestinationById,
   getAllDestinations,
+  getCategories,
   getDestinationById,
   postDestination,
 } from '../controller/destinationController';
@@ -16,8 +17,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/all', getAllDestinations);
+router.get('/categories', getCategories);
 router.get(
-  '/:id',
+  '/byid/:id',
   param('id').isNumeric().withMessage('Id needs to be number'),
   validationErrorHandler,
   getDestinationById,

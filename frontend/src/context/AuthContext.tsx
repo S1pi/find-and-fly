@@ -23,6 +23,8 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
       setUser(response.user);
       navigation('/');
     } catch (err) {
+      // Temporary error handling
+      alert("Credentials don't match");
       console.error((err as Error).message);
     }
   };

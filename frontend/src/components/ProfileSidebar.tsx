@@ -2,9 +2,11 @@ import BaseBtn from './buttons/BaseBtn';
 import {FaUserCog} from 'react-icons/fa';
 import {IoIosStar} from 'react-icons/io'; // Filled star icon
 import {useNavigate} from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 const ProfileSidebar = () => {
   const navigation = useNavigate();
+  const {user} = useAuth();
 
   return (
     <div className='absolute ml-sidebarMargin flex h-screenWithoutHeader w-sidebar flex-col shadow-sidebar'>
@@ -23,20 +25,32 @@ const ProfileSidebar = () => {
             matkoista jne. käyttäjä kirjoittaa
           </p>
         </div>
-        <div className='mt-12 mb-2 flex space-x-2'>
-          <BaseBtn
-            className='!px-0 text-button drop-shadow-md'
-            onClick={() => navigation('/review/add')}
-          >
-            Add Review
-          </BaseBtn>
-          <BaseBtn
-            className='flex justify-center !px-0 text-button drop-shadow-md'
-            onClick={() => {}}
-          >
-            Reviews
-            <IoIosStar className='ml-1 text-h4 text-gold-accent' />
-          </BaseBtn>
+
+        <div className='mt-12 mb-2 flex justify-center space-x-2'>
+          {user ? (
+            <>
+              <BaseBtn
+                className='!px-0 text-button drop-shadow-md'
+                onClick={() => navigation('/review/add')}
+              >
+                Add Review
+              </BaseBtn>
+              <BaseBtn
+                className='flex justify-center !px-0 text-button drop-shadow-md'
+                onClick={() => {}}
+              >
+                Reviews
+                <IoIosStar className='ml-1 text-h4 text-gold-accent' />
+              </BaseBtn>
+            </>
+          ) : (
+            <BaseBtn
+              className='text-button drop-shadow-md'
+              onClick={() => navigation('/login')}
+            >
+              Login
+            </BaseBtn>
+          )}
         </div>
       </div>
     </div>

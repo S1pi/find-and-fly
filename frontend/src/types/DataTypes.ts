@@ -84,6 +84,11 @@ type DestinationDataWithRating = DestinationWithFileData & {
   average_rating: number;
 };
 
+type Category = {
+  id: number;
+  name: string;
+};
+
 export type {
   User,
   UserWithoutPassword,
@@ -99,4 +104,5 @@ export type {
   ReviewCreate,
   ReviewAction,
   FileData,
+  Category,
 };

@@ -19,9 +19,9 @@ const ReviewAdd = () => {
   return (
     <>
       <Header />
-      <div className='flex h-screenWithoutHeader flex-col bg-gradient-to-br from-primary to-lightblue'>
+      <div className='flex h-full flex-col bg-gradient-to-br from-primary to-lightblue'>
         <div
-          className='flex h-2/3 flex-col items-center justify-center gap-8 bg-cover bg-center bg-no-repeat'
+          className='flex min-h-[50vh] flex-col items-center justify-center gap-8 bg-cover bg-center bg-no-repeat lg:min-h-[60vh]'
           style={{backgroundImage: 'url(/img/reviewbg.png)'}}
         >
           <h1 className='max-w-2/5 text-center text-h4 font-bold text-primary drop-shadow-text sm:text-h3 lg:text-h1'>

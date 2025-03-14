@@ -1,8 +1,9 @@
 import {
   Destination,
+  FileData,
   Review,
   SubDestination,
-  TokenData,
+  // TokenData,
   UserWithoutPassword,
 } from './DataTypes';
 
@@ -55,6 +56,8 @@ type UserResponse = {
   userData: UserWithoutPassword;
 };
 
+type FileUploadResponse = MessageResponse & FileData;
+
 export type {
   MessageResponse,
   ErrorResponse,
@@ -66,4 +69,5 @@ export type {
   CreatedReviewMessage,
   DeleteReviewMessage,
   UserResponse,
+  FileUploadResponse,
 };

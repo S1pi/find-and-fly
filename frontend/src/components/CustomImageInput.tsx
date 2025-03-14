@@ -5,12 +5,14 @@ type CustomImageInputProps = {
   inputName: string;
   labelText: string;
   labelStyles?: string;
+  onFileChange?: (file: File | null) => void;
 };
 
 const CustomImageInput = ({
   inputName,
   labelText,
   labelStyles,
+  onFileChange,
 }: CustomImageInputProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -25,6 +27,9 @@ const CustomImageInput = ({
 
     setSelectedFile(file);
     setPreviewUrl(URL.createObjectURL(file));
+
+    // Callback function to parent component
+    onFileChange && onFileChange(file);
 
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -73,6 +78,7 @@ const CustomImageInput = ({
               className='cursor-pointer text-sm text-red-500'
               onClick={() => {
                 setSelectedFile(null);
+                onFileChange && onFileChange(null);
                 setPreviewUrl('');
               }}
             >
@@ -82,34 +88,14 @@ const CustomImageInput = ({
         </>
       )}
       <div
-        // className='flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl bg-secondary px-8 py-4 text-primary shadow-custom'
         className='flex w-full cursor-pointer flex-col items-center gap-2 rounded-full bg-gradient-to-l from-blueg1 to-blueg2 px-3 py-1'
         onClick={handleFileInputClick}
       >
         {previewUrl ? (
           <>
-            {/* <img
-              src={previewUrl}
-              alt='destination preview'
-              className='h-40 w-full rounded-lg object-cover'
-            /> */}
             <span className='flex items-center gap-1'>
               <MdCheckCircle className='text-green-400' /> {selectedFile?.name}
             </span>
-
-            {/* Kato onko tää parempi ku gpt versio */}
-            {/* <div className='flex items-center justify-center gap-2'>
-              <p className='text-sm'>{selectedFile?.name}</p>
-              <button
-                className='text-sm text-red-500'
-                onClick={() => {
-                  setSelectedFile(null);
-                  setPreviewUrl('');
-                }}
-              >
-                Remove
-              </button>
-            </div> */}
           </>
         ) : (
           <div className='flex items-center gap-2'>

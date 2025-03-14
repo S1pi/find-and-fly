@@ -16,10 +16,10 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className='relative flex h-screenWithoutHeader flex-col'>
+      <div className='relative flex min-h-screenWithoutHeader flex-col'>
         <ProfileSidebar />
         <div className='min-h-80 flex-1 bg-[url(/img/parisbg.jpg)] bg-cover bg-bottom'></div>
-        <div className='h-fit flex-2 bg-gradient-to-br from-primary to-lightblue pt-2 pl-afterSidebar'>
+        <div className='flex-2 bg-gradient-to-br from-primary to-lightblue pt-2 pl-afterSidebar'>
           <div id='sortSection' className='flex space-x-4'>
             <div className='flex flex-col'>
               <h3 className='font-bold text-secondary'>DESTINATIONS</h3>
@@ -72,7 +72,7 @@ const Home = () => {
             <h4 className='ml-2'>Destinations</h4>
             {/* <div className='h-[3px] w-full bg-amber-950'></div> */}
             {/* h-[530px] */}
-            <div className='scrollbar-hide m-auto mt-4 flex flex-wrap justify-evenly gap-4'>
+            <div className='scrollbar-hide m-auto mt-4 flex flex-wrap gap-4'>
               {destinations.map((destination) => (
                 <DestinationCard
                   key={destination.id}

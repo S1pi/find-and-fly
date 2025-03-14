@@ -147,7 +147,7 @@ const createDestination = async (
 
   return {
     message: 'Destination created successfully',
-    subDestination_id: result.insertId,
+    destination_id: result.insertId,
     destination: newDestination,
   };
 };

@@ -1,74 +1,65 @@
+import {useState} from 'react';
+import {useDestinations} from '../hooks/apiHooks';
+import {DestinationDataWithRating} from '../types/DataTypes';
 import Header from '../components/Header';
+import DestinationCard from '../components/cards/DestinationCard';
+import AddDestinationModal from '../components/AddDestinationModal';
+import BaseBtn from '../components/buttons/BaseBtn';
+import {MdAddLocation} from 'react-icons/md';
 
-// Hard coded categorylist for now
-const categoryList = [
-  {id: 1, name: 'City'},
-  {id: 2, name: 'Capital'},
-  {id: 3, name: 'Metropolitan'},
-  {id: 4, name: 'historic'},
-  {id: 5, name: 'Mountain'},
-  {id: 6, name: 'Beach'},
-  {id: 7, name: 'Mountain'},
-  {id: 8, name: 'countryside'},
-  {id: 9, name: 'other'},
-];
+// Check if need to import DestinationDataWithRating instead of DestinationWithFileData
 
 const ReviewAdd = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {destinations} = useDestinations();
+  const [selectedItem, setSelectedItem] = useState<
+    DestinationDataWithRating | undefined
+  >(undefined);
+
   return (
     <>
       <Header />
-      <div className='h-screen bg-lightblue'>
-        <h1>Create Destination First</h1>
-
-        <div className='flex h-4/5 items-center justify-center gap-10'>
-          <div className='flex flex-col items-center'>
-            <h3>INFORMATION: </h3>
-            <form className='flex flex-col gap-4'>
-              <input
-                type='text'
-                placeholder='Destination'
-                className='rounded-md border-2 border-primary'
-              />
-              <input
-                type='text'
-                placeholder='Country'
-                className='rounded-md border-2 border-primary'
-              />
-              <textarea
-                placeholder='Description'
-                className='rounded-md border-2 border-primary'
-                rows={5}
-              />
-              {/* Category selection for destination */}
-              <div className='flex flex-col'>
-                <label htmlFor='category'>Category: </label>
-                <select
-                  name='category'
-                  id='category'
-                  className='rounded-md border-2 border-primary'
-                >
-                  <option value=''>--Please choose an option--</option>
-                  {categoryList.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <button className='rounded-md bg-primary px-4 py-2 text-lightblue'>
+      <div className='flex h-screenWithoutHeader flex-col bg-gradient-to-br from-primary to-lightblue'>
+        <div
+          className='flex h-2/3 flex-col items-center justify-center gap-8 bg-cover bg-center bg-no-repeat'
+          style={{backgroundImage: 'url(/img/reviewbg.png)'}}
+        >
+          <h1 className='max-w-2/5 text-center text-h4 font-bold text-primary drop-shadow-text sm:text-h3 lg:text-h1'>
+            Review Your Favorite Destinations Or Bad Experiences
+          </h1>
+          <div className='flex flex-col items-center justify-center gap-2 rounded-2xl bg-secondary px-8 py-4 text-primary shadow-custom'>
+            <h3>Don't find your destination?</h3>
+            <div className='flex w-full items-center justify-center'>
+              <h4 className='w-full'>Add it here: </h4>
+              <BaseBtn
+                className='justify- my-0 flex w-full items-center justify-evenly'
+                onClick={() => setIsModalOpen(true)}
+              >
+                <MdAddLocation className='text-h4' />
                 Add Destination
-              </button>
-            </form>
+              </BaseBtn>
+              {isModalOpen && (
+                <AddDestinationModal onClose={() => setIsModalOpen(false)} />
+              )}
+            </div>
           </div>
-          {/* Picture Upload For it */}
-          <div>
-            <img
-              src='https://via.placeholder.com/150'
-              alt='placeholder'
-              className='rounded-md'
-            />
-            <input type='file' />
+        </div>
+
+        {/* Destination card selection container */}
+        <div className='container m-auto h-full py-8'>
+          <div className='flex flex-col items-center space-x-4'>
+            <h2 className='text-h2 font-bold text-secondary drop-shadow-test'>
+              Choose a Destination to Review
+            </h2>
+            <div className='scrollbar-hide flex flex-wrap justify-center gap-6 overflow-x-auto p-2'>
+              {destinations.map((destination) => (
+                <DestinationCard
+                  key={destination.id}
+                  destination={destination}
+                  setSelectedItem={setSelectedItem}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

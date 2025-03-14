@@ -27,6 +27,10 @@
   --color-blueg1: #48a8bf;
   --color-blueg2: #53c3de;
 
+  /* Modal Background colors */
+  --color-modal-gradient-start: #22304a; /* Kevyt vivahde alkuperäisestä secondary:sta */
+  --color-modal-gradient-end: #4bafd8; /* Sävytetty versio blueg2:sta */
+
   /* Text sizes */
   --text-base: 1rem;
   --text-button: 0.875rem;
@@ -47,6 +51,8 @@
   --shadow-sidebar: 0px 0px 18px rgba(26, 46, 64, 0.5);
   --drop-shadow-custom: 0px 4px 4px rgba(0, 0, 0, 0.25);
   --shadow-custom: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --shadow-modal:
+    0px 16px 32px rgba(0, 0, 0, 0.35), 0px 4px 8px rgba(0, 0, 0, 0.25);
 
   /* Media queries */
   --breakpoint-1xl: 1200px;
@@ -113,5 +119,20 @@
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .rounded-scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .rounded-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .rounded-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--color-secondary);
+    border-radius: 6px;
+    border: 2px solid var(--color-lightgrey);
+    background-clip: padding-box;
   }
 }

@@ -5,6 +5,7 @@ import '@smastrom/react-rating/style.css';
 import {BrowserRouter, Route, Routes} from 'react-router';
 import Profile from './views/Profile';
 import ReviewAdd from './views/ReviewAdd';
+import AddDestinationModal from './components/AddDestinationModal';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/review/add' element={<ReviewAdd />} />
+            <Route path='/destination/add' element={<AddDestinationModal />} />
             <Route path='*' element={<div>404</div>} />
           </Routes>
         </AuthProvider>

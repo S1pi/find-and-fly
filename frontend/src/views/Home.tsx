@@ -4,12 +4,13 @@ import SortCard from '../components/cards/SortCard';
 import Header from '../components/Header';
 import ProfileSidebar from '../components/ProfileSidebar';
 import {useDestinations} from '../hooks/apiHooks';
-import {DestinationWithFileData} from '../types/DataTypes';
+import {DestinationDataWithRating} from '../types/DataTypes';
+// Check if need to import DestinationDataWithRating instead of DestinationWithFileData
 
 const Home = () => {
   const {destinations} = useDestinations();
   const [selectedItem, setSelectedItem] = useState<
-    DestinationWithFileData | undefined
+    DestinationDataWithRating | undefined
   >(undefined);
 
   return (

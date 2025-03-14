@@ -17,7 +17,7 @@ const DestinationCard = (props: DestinationCardProps) => {
   console.log(typeof destination.average_rating);
   return (
     // Basic container for a destination card
-    <div className='h-74 w-44 overflow-hidden rounded-lg drop-shadow-lg'>
+    <div className='min-h-80 w-44 overflow-hidden rounded-lg drop-shadow-lg'>
       {/* Container for image */}
       {/* <div className="flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('/img/landscape-3846391_1280.jpg')] bg-cover bg-center px-2"> */}
       <div
@@ -44,21 +44,21 @@ const DestinationCard = (props: DestinationCardProps) => {
           <h3 className='text-h3 font-semibold text-gold-accent drop-shadow-text'>
             {destination.name}
           </h3>
-          <p className='mb-2 text-base text-primary drop-shadow-text'>
+          <p className='mb-2 line-clamp-2 text-base text-primary drop-shadow-text'>
             {destination.description}
           </p>
         </div>
       </div>
 
       <div
-        className='h-1/4 cursor-pointer rounded-b-lg bg-primary p-2'
+        className='cursor-pointer rounded-b-lg bg-primary p-2'
         onClick={() => alert('Card clicked')}
       >
         <h3 className='text-h3 font-semibold text-secondary'>
           {destination.country}
         </h3>
         {/* Change stars to generate depending on the rating */}
-        <div id='starContainer' className='flex'>
+        <div id='starContainer' className='flex h-full'>
           <Rating
             style={{maxWidth: 150, marginBottom: 10}}
             value={destination.average_rating}

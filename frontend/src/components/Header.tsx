@@ -44,7 +44,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className='relative flex h-22 w-full items-center justify-center bg-primary px-2'>
+    <div className='relative flex h-22 w-full items-center justify-center bg-primary px-2 drop-shadow-md'>
       <img
         src='/img/FindAndFlyLogo.png'
         alt='Find&Fly Logo'

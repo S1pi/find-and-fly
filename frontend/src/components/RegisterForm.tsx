@@ -1,4 +1,5 @@
 import {useForm} from '../hooks/formHooks';
+import BaseBtn from './buttons/BaseBtn';
 
 const RegisterForm = () => {
   const initialValues = {
@@ -45,9 +46,15 @@ const RegisterForm = () => {
         onChange={handleInputChange}
         autoComplete='off'
       />
-      <button className='cursor-pointer rounded-md bg-gradient-to-r from-blueg1 to-blueg2 p-2 text-primary'>
+      {/* Old Button */}
+      {/* <button className='cursor-pointer rounded-md bg-gradient-to-r from-blueg1 to-blueg2 p-2 text-primary'>
         Register
-      </button>
+      </button> */}
+
+      {/* On Click is needed but this case form handles submit so leave it empty */}
+      <BaseBtn className='w-full' onClick={() => {}}>
+        Register
+      </BaseBtn>
     </form>
   );
 };

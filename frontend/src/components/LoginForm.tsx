@@ -1,6 +1,7 @@
 import {useForm} from '../hooks/formHooks';
 import useAuth from '../hooks/useAuth';
 import {Credentials} from '../types/UserTypes';
+import BaseBtn from './buttons/BaseBtn';
 
 const LoginForm = () => {
   const {handleLogin} = useAuth();
@@ -14,6 +15,8 @@ const LoginForm = () => {
     try {
       handleLogin(inputs as Credentials);
     } catch (error) {
+      console.log('Login failed');
+      alert('Login failed');
       console.error(error);
     }
 
@@ -46,9 +49,15 @@ const LoginForm = () => {
         onChange={handleInputChange}
         autoComplete='current-password'
       />
-      <button className='cursor-pointer rounded-md bg-gradient-to-r from-blueg1 to-blueg2 p-2 text-primary'>
+      {/* Old button */}
+      {/* <button className='cursor-pointer rounded-md bg-gradient-to-r from-blueg1 to-blueg2 p-2 text-primary'>
         Login
-      </button>
+      </button> */}
+
+      {/* On Click is needed but this case form handles submit so leave it empty */}
+      <BaseBtn className='w-full' onClick={() => {}}>
+        Login
+      </BaseBtn>
     </form>
   );
 };

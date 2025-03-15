@@ -55,7 +55,7 @@ const LoginForm = () => {
       </button> */}
 
       {/* On Click is needed but this case form handles submit so leave it empty */}
-      <BaseBtn className='w-full' onClick={() => {}}>
+      <BaseBtn className='w-full' onClick={() => {}} type='submit'>
         Login
       </BaseBtn>
     </form>

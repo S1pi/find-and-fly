@@ -19,7 +19,7 @@ const Home = () => {
       <div className='relative flex min-h-screenWithoutHeader flex-col'>
         <ProfileSidebar />
         <div className='min-h-80 flex-1 bg-[url(/img/parisbg.jpg)] bg-cover bg-bottom'></div>
-        <div className='flex-2 bg-gradient-to-br from-primary to-lightblue pt-2 pl-afterSidebar'>
+        <div className='flex-2 bg-gradient-to-br from-primary to-lightblue py-6 pl-afterSidebar shadow-containerTop'>
           <div id='sortSection' className='flex space-x-4'>
             <div className='flex flex-col'>
               <h3 className='font-bold text-secondary'>DESTINATIONS</h3>

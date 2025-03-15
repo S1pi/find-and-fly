@@ -17,7 +17,7 @@ const DestinationCard = (props: DestinationCardProps) => {
   console.log(typeof destination.average_rating);
   return (
     // Basic container for a destination card
-    <div className='min-h-80 w-44 overflow-hidden rounded-lg drop-shadow-lg'>
+    <div className='min-h-80 w-44 overflow-hidden rounded-lg shadow-custom'>
       {/* Container for image */}
       {/* <div className="flex h-3/4 flex-col justify-between rounded-t-lg bg-[url('/img/landscape-3846391_1280.jpg')] bg-cover bg-center px-2"> */}
       <div

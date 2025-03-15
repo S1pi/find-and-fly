@@ -48,7 +48,8 @@ const Header = () => {
       <img
         src='/img/FindAndFlyLogo.png'
         alt='Find&Fly Logo'
-        className='absolute left-4 h-3/5 rounded-2xl md:h-3/4'
+        className='absolute left-4 h-3/5 cursor-pointer rounded-2xl md:h-3/4'
+        onClick={() => navigation('/')}
       />
       <h1 className='text-base font-bold text-gray-800 sm:text-h4 lg:text-h3'>
         {width < 600

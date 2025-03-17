@@ -1,10 +1,39 @@
-import {useNavigate} from 'react-router';
+import {useLocation, useNavigate} from 'react-router-dom';
 import BaseBtn from '../components/buttons/BaseBtn';
 import Header from '../components/Header';
 import {MdLocationOn} from 'react-icons/md';
+import {useEffect} from 'react';
+import {DestinationDataWithRating} from '../types/DataTypes';
+import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
+import {useReviews} from '../hooks/apiHooks';
+import ReviewCard from '../components/cards/ReviewCard';
 
 const Destination = () => {
+  const {reviews, getReviewsByDestId} = useReviews();
+
+  const location = useLocation();
   const navigate = useNavigate();
+  const destinationFromCard: DestinationDataWithRating =
+    location.state?.destination;
+
+  // console.log(destinationFromCard);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (!destinationFromCard) {
+      console.log('No destination found');
+      navigate('/404');
+    }
+
+    getReviewsByDestId(destinationFromCard.id);
+
+    console.log('Destination reviews: ', reviews);
+  }, [destinationFromCard, navigate]);
+
+  if (!destinationFromCard) {
+    return null;
+  }
 
   return (
     <>
@@ -15,10 +44,32 @@ const Destination = () => {
           <div className='bg-opacity-50 flex flex-col items-center gap-6'>
             <div className='flex flex-col items-center justify-center'>
               <div className='flex items-center justify-center gap-4'>
-                <h1 className='text-4xl font-bold text-white'>City Name</h1>
-                <span className='text-3xl text-white'>⭐⭐⭐⭐⭐</span>
+                <h1 className='text-4xl font-bold text-white drop-shadow-custom'>
+                  {destinationFromCard.name}
+                </h1>
+                <div className='rating-wrapper'>
+                  <Rating
+                    style={{
+                      maxWidth: 200,
+                      textShadow: '1px 1px 1px #000',
+                      fontSize: '1.5rem',
+                    }}
+                    value={destinationFromCard.average_rating}
+                    itemStyles={{
+                      itemShapes: ThinRoundedStar,
+                      activeFillColor: '#f5b942',
+                      activeStrokeColor: '#1a2e40',
+                      inactiveFillColor: '#f5f7fa',
+                    }}
+                    readOnly
+                  />
+                </div>
               </div>
             </div>
+            <div className='max-w-96 text-center drop-shadow-custom'>
+              {destinationFromCard.description}
+            </div>
+
             {/* // Home and location buttons */}
 
             <div className='flex items-center justify-center gap-10'>
@@ -39,7 +90,7 @@ const Destination = () => {
 
             {/* Review section */}
             <div className='flex flex-col items-center justify-center gap-4 text-center'>
-              <h6>
+              <h6 className='text-lightgrey drop-shadow-custom'>
                 Have you visited this city? <br />
                 Share your experience with others!
               </h6>
@@ -58,19 +109,13 @@ const Destination = () => {
           <div className='container px-2 text-center md:px-8 lg:px-4 xl:px-8 2xl:px-24 3xl:px-4'>
             <h2 className='font-bold text-secondary'>City Reviews</h2>
             {/* Card container */}
+
             <div className='grid grid-cols-1 justify-items-center gap-4 py-4 lg:grid-cols-2 lg:gap-4 xl:gap-6 3xl:grid-cols-3'>
-              <div className='flex h-50 w-full max-w-72 items-center justify-center rounded-lg bg-white p-4 shadow-lg 2xl:bg-amber-400'>
-                Kortti 1
-              </div>
-              <div className='flex h-50 w-full max-w-72 items-center justify-center rounded-lg bg-white p-4 shadow-lg 2xl:bg-amber-400'>
-                Kortti 1
-              </div>
-              <div className='flex h-50 w-full max-w-72 items-center justify-center rounded-lg bg-white p-4 shadow-lg 2xl:bg-amber-400'>
-                Kortti 1
-              </div>
-              <div className='flex h-50 w-full max-w-72 items-center justify-center rounded-lg bg-white p-4 shadow-lg 2xl:bg-amber-400'>
-                Kortti 1
-              </div>
+              {/* TODO: Add reviews as card components */}
+              {reviews.map((review) => (
+                // <ReviewCard key={review.id} review={review} />
+                <ReviewCard key={review.id} />
+              ))}
             </div>
           </div>
           {/* // Divider line */}

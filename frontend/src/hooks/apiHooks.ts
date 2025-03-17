@@ -3,6 +3,8 @@ import {
   Category,
   DestinationCreate,
   DestinationDataWithRating,
+  Review,
+  SubDestination,
 } from '../types/DataTypes';
 import {fetchData} from '../lib/functions';
 import {Credentials} from '../types/UserTypes';
@@ -19,6 +21,7 @@ const useDestinations = () => {
   );
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [subDestinations, setSubDestinations] = useState<SubDestination[]>([]);
 
   const getDestinations = async () => {
     try {
@@ -76,18 +79,6 @@ const useDestinations = () => {
   };
 
   useEffect(() => {
-    // const getDestinations = async () => {
-    //   try {
-    //     const destinations = await fetchData<DestinationDataWithRating[]>(
-    //       import.meta.env.VITE_MEDIA_API + '/destinations/all',
-    //     );
-    //     console.log(destinations);
-    //     setDestinations(destinations);
-    //   } catch (err) {
-    //     console.error((err as Error).message);
-    //   }
-    // };
-
     const getCategories = async () => {
       try {
         const categories = await fetchData<Category[]>(
@@ -117,6 +108,34 @@ const useDestinations = () => {
   }, []);
 
   return {destinations, categories, postDestination};
+};
+
+const useReviews = () => {
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  const getReviewsByDestId = async (destinationId: number) => {
+    try {
+      console.log('Fetching reviews for destination id: ' + destinationId);
+
+      const reviews = await fetchData<Review[]>(
+        import.meta.env.VITE_MEDIA_API +
+          '/reviews/getall/byid/' +
+          destinationId,
+      );
+      console.log(reviews);
+      setReviews(reviews);
+    } catch (err) {
+      if ((err as Error).message === 'No reviews found') {
+        console.log('No reviews found for destination id: ' + destinationId);
+        setReviews([]);
+        return;
+      }
+
+      console.error((err as Error).message);
+    }
+  };
+
+  return {reviews, getReviewsByDestId};
 };
 
 const useAuthentication = () => {
@@ -197,4 +216,4 @@ const useFileUpload = () => {
   return {postFile};
 };
 
-export {useDestinations, useAuthentication, useUser, useFileUpload};
+export {useDestinations, useAuthentication, useUser, useFileUpload, useReviews};

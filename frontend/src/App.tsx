@@ -19,8 +19,7 @@ function App() {
             <Route path='/review/add' element={<ReviewAdd />} />
             {/* //This is the correct path for the destination page. For the sake of
             the test, I will use only /destination */}
-            {/* <Route path='/destination/:id' element={<div>Destination</div>} /> */}
-            <Route path='/destination' element={<Destination />} />
+            <Route path='/destination/:name' element={<Destination />} />
             <Route path='*' element={<div>404</div>} />
           </Routes>
         </AuthProvider>

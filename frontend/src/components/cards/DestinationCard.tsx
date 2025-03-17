@@ -5,6 +5,7 @@ import {IoLocationSharp} from 'react-icons/io5';
 import {MdReport} from 'react-icons/md';
 import {DestinationDataWithRating} from '../../types/DataTypes';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
+import {Link} from 'react-router';
 
 type DestinationCardProps = {
   destination: DestinationDataWithRating;
@@ -14,7 +15,6 @@ type DestinationCardProps = {
 const DestinationCard = (props: DestinationCardProps) => {
   const {destination} = props;
 
-  console.log(typeof destination.average_rating);
   return (
     // Basic container for a destination card
     <div className='min-h-80 w-44 overflow-hidden rounded-lg shadow-custom'>
@@ -49,29 +49,30 @@ const DestinationCard = (props: DestinationCardProps) => {
           </p>
         </div>
       </div>
-
-      <div
-        className='cursor-pointer rounded-b-lg bg-primary p-2'
-        onClick={() => alert('Card clicked')}
+      <Link
+        to={`/destination/${destination.name.toLocaleLowerCase()}`}
+        state={{destination}}
       >
-        <h3 className='text-h3 font-semibold text-secondary'>
-          {destination.country}
-        </h3>
-        {/* Change stars to generate depending on the rating */}
-        <div id='starContainer' className='flex h-full'>
-          <Rating
-            style={{maxWidth: 150, marginBottom: 10}}
-            value={destination.average_rating}
-            itemStyles={{
-              itemShapes: ThinRoundedStar,
-              activeFillColor: '#38a2bc',
-              activeStrokeColor: '#1a2e40',
-              inactiveFillColor: '#b1cac9',
-            }}
-            readOnly
-          />
+        <div className='cursor-pointer rounded-b-lg bg-primary p-2'>
+          <h3 className='text-h3 font-semibold text-secondary'>
+            {destination.country}
+          </h3>
+          {/* Change stars to generate depending on the rating */}
+          <div id='starContainer' className='flex h-full'>
+            <Rating
+              style={{maxWidth: 150, marginBottom: 10}}
+              value={destination.average_rating}
+              itemStyles={{
+                itemShapes: ThinRoundedStar,
+                activeFillColor: '#38a2bc',
+                activeStrokeColor: '#1a2e40',
+                inactiveFillColor: '#b1cac9',
+              }}
+              readOnly
+            />
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

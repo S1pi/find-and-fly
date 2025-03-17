@@ -1,4 +1,4 @@
-import {use, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import BaseBtn from './buttons/BaseBtn';
 import {MdOutlineLanguage} from 'react-icons/md';
 import {FaStar} from 'react-icons/fa';

@@ -110,11 +110,16 @@ const Destination = () => {
             <h2 className='font-bold text-secondary'>City Reviews</h2>
             {/* Card container */}
 
+            {reviews.length === 0 && (
+              <div className='flex h-96 items-center justify-center'>
+                <h3>No reviews yet be first to review</h3>
+              </div>
+            )}
             <div className='grid grid-cols-1 justify-items-center gap-4 py-4 lg:grid-cols-2 lg:gap-4 xl:gap-6 3xl:grid-cols-3'>
               {/* TODO: Add reviews as card components */}
               {reviews.map((review) => (
                 // <ReviewCard key={review.id} review={review} />
-                <ReviewCard key={review.id} />
+                <ReviewCard key={review.id} review={review} />
               ))}
             </div>
           </div>

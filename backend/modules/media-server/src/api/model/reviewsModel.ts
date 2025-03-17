@@ -42,11 +42,15 @@ const getReviewsByDestinationId = async (id: number): Promise<Review[]> => {
                 r.comment,
                 COUNT(CASE WHEN rr.reaction = 'like' THEN 1 END) as likes,
                 COUNT(CASE WHEN rr.reaction = 'dislike' THEN 1 END) as dislikes,
-                r.created_at
+                r.created_at,
+                u.username,
+                f.file_url AS profile_picture
               FROM reviews r
               LEFT JOIN review_actions rr ON r.id = rr.review_id
+              INNER JOIN users u ON r.user_id = u.id
+              LEFT JOIN files f ON f.target_type = 'user' AND f.target_id = u.id
               WHERE r.destination_id = ?
-              GROUP BY r.id
+              GROUP BY r.id, u.username, f.file_url
               `;
 
   const [rows] = await promisePool.execute<RowDataPacket[] & Review[]>(query, [

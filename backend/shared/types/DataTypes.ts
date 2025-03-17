@@ -65,9 +65,14 @@ type Review = {
   likes: number;
   dislikes: number;
   created_at: Date | string;
+  username?: string;
+  profile_picture?: string;
 };
 
-type ReviewCreate = Omit<Review, 'id' | 'created_at' | 'likes' | 'dislikes'>;
+type ReviewCreate = Omit<
+  Review,
+  'id' | 'created_at' | 'likes' | 'dislikes' | 'username' | 'profile_picture'
+>;
 
 type ReviewAction = {
   id: number;

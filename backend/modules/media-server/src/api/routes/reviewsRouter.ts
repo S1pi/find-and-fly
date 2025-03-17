@@ -3,6 +3,7 @@ import {
   deleteReviewById,
   getAllReviews,
   getReviewById,
+  getReviewsByDestId,
   postReview,
   postReviewDislike,
   postReviewLike,
@@ -20,6 +21,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/getall', getAllReviews);
+router.get(
+  '/getall/byid/:id',
+  param('id').isNumeric().withMessage('Destination id must be a number'),
+  validationErrorHandler,
+  getReviewsByDestId,
+);
+
 router.get(
   '/:id',
   param('id').isNumeric().withMessage('Review id must be a number'),

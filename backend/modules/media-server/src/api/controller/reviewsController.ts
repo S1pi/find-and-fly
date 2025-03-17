@@ -7,6 +7,7 @@ import {
   getAllReviewsDb,
   getOneReviewById,
   getReviewActionData,
+  getReviewsByDestinationId,
   updateReviewReaction,
 } from '../model/reviewsModel';
 import {ReviewCreate} from 'types/DataTypes';
@@ -18,6 +19,22 @@ const getAllReviews = async (
 ) => {
   try {
     const reviews = await getAllReviewsDb();
+
+    res.status(200).json(reviews);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getReviewsByDestId = async (
+  req: Request<{id: string}>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const destinationId = req.params.id;
+
+    const reviews = await getReviewsByDestinationId(Number(destinationId));
 
     res.status(200).json(reviews);
   } catch (err) {
@@ -166,6 +183,7 @@ const handleReviewReaction = async (
 export {
   getAllReviews,
   getReviewById,
+  getReviewsByDestId,
   postReview,
   deleteReviewById,
   postReviewLike,

@@ -31,6 +31,35 @@ const getAllReviewsDb = async () => {
   return rows;
 };
 
+const getReviewsByDestinationId = async (id: number): Promise<Review[]> => {
+  const query = `
+              SELECT 
+                r.id,
+                r.user_id,
+                r.destination_id,
+                r.rating,
+                r.trip_type,
+                r.comment,
+                COUNT(CASE WHEN rr.reaction = 'like' THEN 1 END) as likes,
+                COUNT(CASE WHEN rr.reaction = 'dislike' THEN 1 END) as dislikes,
+                r.created_at
+              FROM reviews r
+              LEFT JOIN review_actions rr ON r.id = rr.review_id
+              WHERE r.destination_id = ?
+              GROUP BY r.id
+              `;
+
+  const [rows] = await promisePool.execute<RowDataPacket[] & Review[]>(query, [
+    id,
+  ]);
+
+  if (rows.length === 0) {
+    throw new CustomError('No reviews found', 404);
+  }
+
+  return rows;
+};
+
 const getOneReviewById = async (id: number): Promise<Review> => {
   const query = `
               SELECT 
@@ -166,6 +195,7 @@ const addReviewReaction = async (
 
 export {
   getAllReviewsDb,
+  getReviewsByDestinationId,
   getOneReviewById,
   createReview,
   deleteReview,

@@ -5,6 +5,7 @@ import {body, param} from 'express-validator';
 import {
   deleteSubDestinationById,
   getAllSubDestinations,
+  getSubDestByDestination,
   getSubDestById,
   postSubDestination,
 } from '../controller/subDestController';
@@ -16,6 +17,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/all', getAllSubDestinations);
+router.get(
+  '/bydestination/:id',
+  param('id').isNumeric().withMessage('Id needs to be number'),
+  validationErrorHandler,
+  getSubDestByDestination,
+);
+
 router.get(
   '/:id',
   param('id').isNumeric().withMessage('Id needs to be number'),

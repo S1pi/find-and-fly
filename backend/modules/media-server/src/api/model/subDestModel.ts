@@ -17,6 +17,19 @@ const getSubDestinationList = async (): Promise<SubDestination[]> => {
   return rows;
 };
 
+const getSubDestinationsByDestinationId = async (
+  id: number,
+): Promise<SubDestination[]> => {
+  const query = `SELECT * FROM sub_destinations WHERE destination_id = ?`;
+
+  const [rows] = await promisePool.execute<RowDataPacket[] & SubDestination[]>(
+    query,
+    [id],
+  );
+
+  return rows;
+};
+
 const getSubDestinationById = async (id: number): Promise<SubDestination> => {
   const query = `SELECT * FROM sub_destinations WHERE id = ?`;
 
@@ -88,6 +101,7 @@ const deleteSubDestination = async (
 export {
   getSubDestinationList,
   getSubDestinationById,
+  getSubDestinationsByDestinationId,
   createSubDestination,
   deleteSubDestination,
 };

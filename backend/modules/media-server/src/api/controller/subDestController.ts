@@ -4,6 +4,7 @@ import {
   deleteSubDestination,
   getSubDestinationById,
   getSubDestinationList,
+  getSubDestinationsByDestinationId,
 } from '../model/subDestModel';
 import {SubDestinationCreate} from 'types/DataTypes';
 import CustomError from 'utils/CustomError';
@@ -18,6 +19,24 @@ const getAllSubDestinations = async (
     const subDestinations = await getSubDestinationList();
 
     res.status(200).json(subDestinations);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getSubDestByDestination = async (
+  req: Request<{id: string}>,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const destinationId = req.params.id;
+
+    const subDestList = await getSubDestinationsByDestinationId(
+      Number(destinationId),
+    );
+
+    res.status(200).json(subDestList);
   } catch (err) {
     next(err);
   }
@@ -91,6 +110,7 @@ const deleteSubDestinationById = async (
 export {
   getAllSubDestinations,
   getSubDestById,
+  getSubDestByDestination,
   postSubDestination,
   deleteSubDestinationById,
 };

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDestinations} from '../hooks/apiHooks';
 import {DestinationDataWithRating} from '../types/DataTypes';
 import Header from '../components/Header';

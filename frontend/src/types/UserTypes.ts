@@ -13,6 +13,7 @@ type RegisterCredentials = {
 
 type AuthContextType = {
   user: UserWithoutPassword | null;
+  loading: boolean;
   handleLogin: (credentials: Credentials) => void;
   handleLogout: () => void;
   handleAutoLogin: () => void; // Implement this later

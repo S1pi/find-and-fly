@@ -46,6 +46,11 @@ type SubDestination = {
   created_at: Date | string;
 };
 
+type SubDestinationWithFileData = SubDestination & {
+  file_name: string;
+  file_url: string;
+};
+
 type SubDestinationCreate = Omit<
   SubDestination,
   'id' | 'created_at' | 'user_id'
@@ -103,6 +108,7 @@ export type {
   DestinationDataWithRating,
   DestinationCreate,
   SubDestination,
+  SubDestinationWithFileData,
   SubDestinationCreate,
   Review,
   ReviewCreate,

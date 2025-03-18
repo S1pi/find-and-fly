@@ -4,7 +4,7 @@ import {
   DestinationCreate,
   DestinationDataWithRating,
   Review,
-  SubDestination,
+  SubDestinationWithFileData,
 } from '../types/DataTypes';
 import {fetchData} from '../lib/functions';
 import {Credentials} from '../types/UserTypes';
@@ -21,7 +21,9 @@ const useDestinations = () => {
   );
 
   const [categories, setCategories] = useState<Category[]>([]);
-  const [subDestinations, setSubDestinations] = useState<SubDestination[]>([]);
+  const [subDestinations, setSubDestinations] = useState<
+    SubDestinationWithFileData[]
+  >([]);
 
   const getDestinations = async () => {
     try {
@@ -30,6 +32,20 @@ const useDestinations = () => {
       );
       console.log(destinations);
       setDestinations(destinations);
+    } catch (err) {
+      console.error((err as Error).message);
+    }
+  };
+
+  const getSubDestinations = async (destinationId: number) => {
+    try {
+      const subDestinations = await fetchData<SubDestinationWithFileData[]>(
+        import.meta.env.VITE_MEDIA_API +
+          '/subdest/bydestination/' +
+          destinationId,
+      );
+      console.log(subDestinations);
+      setSubDestinations(subDestinations);
     } catch (err) {
       console.error((err as Error).message);
     }
@@ -107,7 +123,13 @@ const useDestinations = () => {
     getDestinations();
   }, []);
 
-  return {destinations, categories, postDestination};
+  return {
+    destinations,
+    categories,
+    subDestinations,
+    getSubDestinations,
+    postDestination,
+  };
 };
 
 const useReviews = () => {

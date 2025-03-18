@@ -1,22 +1,22 @@
-import {useLocation, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import BaseBtn from '../components/buttons/BaseBtn';
 import Header from '../components/Header';
 import {MdLocationOn} from 'react-icons/md';
 import {useEffect} from 'react';
 import {DestinationDataWithRating} from '../types/DataTypes';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
-import {useReviews} from '../hooks/apiHooks';
+import {useDestinations, useReviews} from '../hooks/apiHooks';
 import ReviewCard from '../components/cards/ReviewCard';
+import SubDestCard from '../components/cards/SubDestinationCard';
 
 const Destination = () => {
   const {reviews, getReviewsByDestId} = useReviews();
+  const {subDestinations, getSubDestinations} = useDestinations();
 
   const location = useLocation();
   const navigate = useNavigate();
   const destinationFromCard: DestinationDataWithRating =
     location.state?.destination;
-
-  // console.log(destinationFromCard);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -27,6 +27,9 @@ const Destination = () => {
     }
 
     getReviewsByDestId(destinationFromCard.id);
+    getSubDestinations(destinationFromCard.id);
+
+    console.log('subDestinations: ', subDestinations);
 
     console.log('Destination reviews: ', reviews);
   }, [destinationFromCard, navigate]);
@@ -94,12 +97,13 @@ const Destination = () => {
                 Have you visited this city? <br />
                 Share your experience with others!
               </h6>
-              <BaseBtn
-                onClick={() => navigate('/review')}
+              <Link
                 className='flex w-1/2! items-center justify-center gap-1 px-4 py-2'
+                to={`/review/${destinationFromCard.name.toLocaleLowerCase()}`}
+                state={{destination: destinationFromCard}}
               >
-                Add review
-              </BaseBtn>
+                <BaseBtn onClick={() => {}}>Add review</BaseBtn>
+              </Link>
             </div>
           </div>
         </div>
@@ -129,31 +133,20 @@ const Destination = () => {
           <div className='container px-2 text-center md:px-4 lg:px-12 xl:px-8 2xl:px-24 3xl:px-4'>
             <h2 className='font-bold text-secondary'>Explore Attractions</h2>
             {/* Card container */}
+
+            {subDestinations.length === 0 && (
+              <div className='flex h-96 items-center justify-center'>
+                <h3>No attractions added yet, Be first to add one!</h3>
+              </div>
+            )}
+
             <div className='grid grid-cols-1 justify-items-center gap-4 py-4 smd:grid-cols-2 lg:gap-x-6 lg:gap-y-10 xl:grid-cols-3 xl:gap-6 3xl:grid-cols-4'>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
-              <div className='flex h-60 w-full max-w-54 items-center justify-center rounded-lg bg-white p-4 shadow-lg'>
-                Kortti 1
-              </div>
+              {subDestinations.map((subDestination) => (
+                <SubDestCard
+                  key={subDestination.id}
+                  subDestination={subDestination}
+                />
+              ))}
             </div>
           </div>
         </div>

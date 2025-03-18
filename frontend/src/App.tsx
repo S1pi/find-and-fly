@@ -7,6 +7,7 @@ import Profile from './views/Profile';
 import ReviewAdd from './views/ReviewAdd';
 import Destination from './views/Destination';
 import ProtectedRoute from './components/ProtectedRoute';
+import ReviewCreation from './views/ReviewCreation';
 
 function App() {
   return (
@@ -32,10 +33,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
-            {/* //This is the correct path for the destination page. For the sake of
-            the test, I will use only /destination */}
             <Route path='/destination/:name' element={<Destination />} />
+            <Route path='/review/:name' element={<ReviewCreation />} />
             <Route path='*' element={<div>404</div>} />
           </Routes>
         </AuthProvider>

@@ -1,6 +1,10 @@
 import {ResultSetHeader, RowDataPacket} from 'mysql2';
 import promisePool from 'shared/database/connection';
-import {SubDestination, SubDestinationCreate} from 'types/DataTypes';
+import {
+  SubDestination,
+  SubDestinationCreate,
+  SubDestinationWithFileData,
+} from 'types/DataTypes';
 import {
   CreatedDestinationMessage,
   DeleteDestinationMessage,
@@ -19,13 +23,26 @@ const getSubDestinationList = async (): Promise<SubDestination[]> => {
 
 const getSubDestinationsByDestinationId = async (
   id: number,
-): Promise<SubDestination[]> => {
-  const query = `SELECT * FROM sub_destinations WHERE destination_id = ?`;
+): Promise<SubDestinationWithFileData[]> => {
+  // const query = `SELECT * FROM sub_destinations WHERE destination_id = ?`;
+  const query = `SELECT 
+  sd.id,
+  sd.name,
+  sd.description,
+  sd.destination_id,
+  sd.rating,
+  sd.user_id,
+  sd.created_at,
+  f.file_name,
+  f.file_url
+FROM sub_destinations sd
+LEFT JOIN files f ON sd.id = f.target_id AND f.target_type = 'sub_destination'
+WHERE sd.destination_id = ?
+GROUP BY sd.id, f.file_name, f.file_url;`;
 
-  const [rows] = await promisePool.execute<RowDataPacket[] & SubDestination[]>(
-    query,
-    [id],
-  );
+  const [rows] = await promisePool.execute<
+    RowDataPacket[] & SubDestinationWithFileData[]
+  >(query, [id]);
 
   return rows;
 };

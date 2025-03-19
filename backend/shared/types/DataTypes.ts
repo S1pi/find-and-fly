@@ -58,6 +58,7 @@ type SubDestinationCreate = Omit<
   'id' | 'created_at' | 'user_id'
 > & {
   user_id?: number;
+  file_data?: FileData;
 };
 
 type Review = {

@@ -10,6 +10,7 @@ import {
   DeleteDestinationMessage,
 } from 'types/MessageTypes';
 import CustomError from 'utils/CustomError';
+import {addFileData} from './mediaModel';
 
 const getSubDestinationList = async (): Promise<SubDestination[]> => {
   const query = `SELECT * FROM sub_destinations`;
@@ -81,6 +82,23 @@ const createSubDestination = async (
   }
 
   const subDestinationCreated = await getSubDestinationById(result.insertId);
+
+  const fileData = {
+    user_id: subDestination.user_id,
+    target_type: 'sub_destination',
+    target_id: result.insertId,
+    file_name: subDestination.file_data?.file_name,
+    file_url: subDestination.file_data?.file_url,
+  };
+
+  try {
+    const fileResponse = await addFileData(fileData);
+
+    console.log('fileResponse: ', fileResponse);
+  } catch (err) {
+    console.log('Error adding file data: ', err);
+    throw new CustomError('Error adding file data', 500);
+  }
 
   return {
     message: 'SubDestination created successfully',

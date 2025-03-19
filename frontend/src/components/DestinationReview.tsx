@@ -5,7 +5,7 @@ import {useReviews} from '../hooks/apiHooks';
 import {useForm} from '../hooks/formHooks';
 import {DestinationDataWithRating} from '../types/DataTypes';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
-import CustomDropDown from './CustomDropDown';
+import CustomDropDown from './customs/CustomDropDown';
 
 type DestinationReviewProps = {
   selectedDestination: DestinationDataWithRating;

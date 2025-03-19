@@ -1,7 +1,7 @@
 // Add review data as card props
 import {Rating, ThinStar} from '@smastrom/react-rating';
 import {Review} from '../../types/DataTypes';
-import Avatar from '../Avatar';
+import Avatar from '../customs/Avatar';
 import {TiThumbsUp} from 'react-icons/ti';
 import {TiThumbsDown} from 'react-icons/ti';
 

@@ -1,10 +1,10 @@
 import {useEffect, useRef, useState} from 'react';
-import CustomImageInput from './CustomImageInput';
+import CustomImageInput from './customs/CustomImageInput';
 import {IoIosCloseCircle} from 'react-icons/io';
 import BaseBtn from './buttons/BaseBtn';
 import {useForm} from '../hooks/formHooks';
 import {useDestinations} from '../hooks/apiHooks';
-import CustomDropDown from './CustomDropDown';
+import CustomDropDown from './customs/CustomDropDown';
 import {Category, DestinationCreate} from '../types/DataTypes';
 
 type AddDestinationModalProps = {
@@ -66,7 +66,7 @@ const AddDestinationModal = ({onClose}: AddDestinationModalProps) => {
       // Redirect to destinations/(newDestinationPath) to add a review for the newly added destination
       // navigation(`/destinations/${inputs.destname.toLowerCase().replace(' ', '-')}`);
       // Temporary solution to refresh the page to show the new destination
-      // window.location.reload();
+      window.location.reload();
     } catch (err) {
       console.error('Error postin destination: ', (err as Error).message);
       alert('Something went wrong. Please try again');

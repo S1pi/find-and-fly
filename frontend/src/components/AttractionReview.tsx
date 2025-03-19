@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {DestinationDataWithRating} from '../types/DataTypes';
-import CustomImageInput from './CustomImageInput';
+import CustomImageInput from './customs/CustomImageInput';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
 import BaseBtn from './buttons/BaseBtn';
 import SubDestCard from './cards/SubDestinationCard';

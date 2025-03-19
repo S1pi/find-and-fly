@@ -13,6 +13,15 @@ const Home = () => {
     DestinationDataWithRating | undefined
   >(undefined);
 
+  const sortByRating = (
+    a: DestinationDataWithRating,
+    b: DestinationDataWithRating,
+  ) => {
+    return b.average_rating - a.average_rating;
+  };
+
+  destinations.sort(sortByRating);
+
   return (
     <>
       <Header />

@@ -42,7 +42,12 @@ const Destination = () => {
     <>
       <Header />
       <div className='relative flex min-h-screenWithoutHeader flex-col'>
-        <div className='flex min-h-[40vh] justify-end bg-[url(/img/reviewbg.png)] bg-cover bg-center p-10'>
+        <div
+          className='flex min-h-[40vh] justify-end bg-cover bg-center p-10'
+          style={{
+            backgroundImage: `url(/img/reviewbg.png)`,
+          }}
+        >
           {/* // wrapper */}
           <div className='bg-opacity-50 flex flex-col items-center gap-6'>
             <div className='flex flex-col items-center justify-center'>

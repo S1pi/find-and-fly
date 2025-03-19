@@ -12,7 +12,7 @@ const ReviewCreation = () => {
   const navigate = useNavigate();
 
   const [showDestinationReviewScreen, setShowDestinationReviewScreen] =
-    useState<boolean>(false);
+    useState<boolean>(true);
 
   const destinationFromCard: DestinationDataWithRating =
     location.state?.destination;

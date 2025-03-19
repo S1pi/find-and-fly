@@ -5,6 +5,7 @@ import {
   DestinationDataWithRating,
   Review,
   ReviewCreate,
+  SubDestinationCreate,
   SubDestinationWithFileData,
 } from '../types/DataTypes';
 import {fetchData} from '../lib/functions';
@@ -96,6 +97,50 @@ const useDestinations = () => {
     }
   };
 
+  const postSubDestination = async (
+    file: File,
+    attractionInfo: SubDestinationCreate,
+    token: string,
+  ) => {
+    const {postFile} = useFileUpload();
+
+    try {
+      const fileResponse = await postFile(file, token);
+      console.log('fileResponse: ', fileResponse);
+      const subDestination = {
+        ...attractionInfo,
+        file_data: {
+          file_name: fileResponse.file_name,
+          file_url: fileResponse.file_url,
+        },
+      };
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(subDestination),
+      };
+
+      const response = await fetchData<CreatedDestinationMessage>(
+        import.meta.env.VITE_MEDIA_API + '/subdest/create',
+        options,
+      );
+
+      // getSubDestinations(attractionInfo.destination_id);
+
+      // This don't work cuz response don't have average_rating
+      // if want to use this, need to fetch all destinations again
+      // setSubDestinations([...subDestinations, response]);
+      console.log(response);
+      return response.message;
+    } catch (err) {
+      console.error((err as Error).message);
+    }
+  };
+
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -131,6 +176,7 @@ const useDestinations = () => {
     subDestinations,
     getSubDestinations,
     postDestination,
+    postSubDestination,
   };
 };
 

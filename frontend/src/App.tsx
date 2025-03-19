@@ -34,7 +34,14 @@ function App() {
               }
             />
             <Route path='/destination/:name' element={<Destination />} />
-            <Route path='/review/:name' element={<ReviewCreation />} />
+            <Route
+              path='/review/:name'
+              element={
+                <ProtectedRoute>
+                  <ReviewCreation />
+                </ProtectedRoute>
+              }
+            />
             <Route path='*' element={<div>404</div>} />
           </Routes>
         </AuthProvider>

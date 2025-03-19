@@ -4,12 +4,14 @@ import {
   DestinationCreate,
   DestinationDataWithRating,
   Review,
+  ReviewCreate,
   SubDestinationWithFileData,
 } from '../types/DataTypes';
 import {fetchData} from '../lib/functions';
 import {Credentials} from '../types/UserTypes';
 import {
   CreatedDestinationMessage,
+  CreatedReviewMessage,
   FileUploadResponse,
   LoginResponse,
   UserResponse,
@@ -157,7 +159,37 @@ const useReviews = () => {
     }
   };
 
-  return {reviews, getReviewsByDestId};
+  const postReview = async (
+    reviewData: Omit<ReviewCreate, 'user_id'>,
+    token: string,
+  ) => {
+    // Convert trip type to lowercase to match the database
+    reviewData.trip_type = reviewData.trip_type.toLowerCase();
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(reviewData),
+    };
+
+    try {
+      const response = await fetchData<CreatedReviewMessage>(
+        import.meta.env.VITE_MEDIA_API + '/reviews/create',
+        options,
+      );
+      console.log(response);
+      return response.message;
+      // Don't work cuz response don't have username or profile_pic
+      // setReviews([...reviews, response.review]);
+    } catch (err) {
+      console.error((err as Error).message);
+    }
+  };
+
+  return {reviews, getReviewsByDestId, postReview};
 };
 
 const useAuthentication = () => {

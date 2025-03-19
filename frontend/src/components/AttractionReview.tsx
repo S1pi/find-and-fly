@@ -4,6 +4,7 @@ import CustomImageInput from './CustomImageInput';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
 import BaseBtn from './buttons/BaseBtn';
 import SubDestCard from './cards/SubDestinationCard';
+import {useForm} from '../hooks/formHooks';
 
 type AttractionReviewProps = {
   selectedDestination: DestinationDataWithRating;
@@ -13,11 +14,42 @@ const AttractionReview = ({selectedDestination}: AttractionReviewProps) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [rating, setRating] = useState<number>(0);
 
+  const handleAttractionSubmit = async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      alert('Please login to add a review');
+      return;
+    }
+
+    if (!inputs.attractionName || !inputs.attractionDescription) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    if (!selectedImage || !rating) {
+      alert('Please select an image and rating');
+      return;
+    }
+
+    alert('Attraction review will be implemented soon!');
+  };
+
+  const initValues = {
+    attractionName: '',
+    attractionDescription: '',
+  };
+
+  const {handleSubmit, handleInputChange, inputs} = useForm(
+    handleAttractionSubmit,
+    initValues,
+  );
+
   return (
     <div className='flex h-screen flex-12 flex-col items-center gap-4 px-12 py-4 text-secondary'>
       <h1>Add Review For Attraction In {selectedDestination.name}</h1>
-      <div className='flex w-full flex-row justify-evenly'>
-        <div className='flex flex-col items-center gap-12 rounded-lg bg-secondary p-4 text-primary drop-shadow-sidebar-strong'>
+      <div className='flex w-full flex-row justify-evenly gap-24'>
+        <div className='flex max-w-96 flex-1 flex-col items-center gap-12 rounded-lg bg-secondary p-4 text-primary drop-shadow-sidebar-strong'>
           <CustomImageInput
             inputName='attractionimage'
             labelText='Attraction Image'
@@ -39,18 +71,29 @@ const AttractionReview = ({selectedDestination}: AttractionReviewProps) => {
             />
           </div>
         </div>
-        <form className='flex flex-col gap-4'>
+        <form
+          className='flex max-w-96 flex-2 flex-col gap-4'
+          onSubmit={handleSubmit}
+        >
           <label>Attraction Name</label>
           <input
+            name='attractionName'
+            maxLength={20}
+            minLength={3}
             type='text'
             placeholder='Attraction Name'
+            onChange={handleInputChange}
+            value={inputs.attractionName}
             className='rounded-lg bg-primary px-3 py-2'
           />
 
           <label>Attraction Description</label>
           <textarea
+            name='attractionDescription'
             className='rounded-scrollbar max-h-32 min-h-16 resize-y scroll-smooth rounded-lg bg-primary px-3 py-2'
             placeholder='Attraction Description'
+            value={inputs.attractionDescription}
+            onChange={handleInputChange}
           />
           <BaseBtn
             type='submit'
@@ -60,11 +103,14 @@ const AttractionReview = ({selectedDestination}: AttractionReviewProps) => {
             Submit Review
           </BaseBtn>
         </form>
-        <div>
+      </div>
+      <div className='flex h-full flex-col items-center justify-between gap-4'>
+        <h4 className=''>Preview Your Attraction Card</h4>
+        <div className='flex h-full'>
           <SubDestCard
             subDestination={{
               user_id: 1,
-              name: 'SubDestination Name',
+              name: inputs.attractionName || 'Attraction Name',
               rating: rating,
               file_url: `${selectedImage ? URL.createObjectURL(selectedImage as File) : ' https://fakeimg.pl/600x400'}`,
               file_name: 'SubDestination Image',

@@ -13,7 +13,7 @@ const SubDestCard = ({subDestination}: SubDestCardProps) => {
   };
 
   return (
-    <div className='relative flex h-60 w-full max-w-54 flex-col justify-center rounded-lg bg-white shadow-lg'>
+    <div className='relative flex max-h-80 w-full max-w-54 flex-col justify-center rounded-lg bg-white shadow-lg'>
       <div
         className='absolute top-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-lightgrey'
         onClick={() => alert('Report subdestination will be implemented soon!')}
@@ -26,7 +26,7 @@ const SubDestCard = ({subDestination}: SubDestCardProps) => {
       ></div>
 
       <div className='flex flex-col items-center justify-center gap-1 p-2'>
-        <h3 className='text-h3 font-bold text-secondary'>
+        <h3 className='flex overflow-x-auto text-h3 font-bold text-secondary'>
           {capitalize(subDestination.name)}
         </h3>
         {/* <p className='text-sm'>{subDestination.rating}</p> */}

@@ -3,7 +3,7 @@ import {DestinationDataWithRating} from '../types/DataTypes';
 import BaseBtn from '../components/buttons/BaseBtn';
 import {IoCaretBackOutline} from 'react-icons/io5';
 import {IoMdHome} from 'react-icons/io';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import DestinationReview from '../components/DestinationReview';
 import AttractionReview from '../components/AttractionReview';
 
@@ -16,6 +16,19 @@ const ReviewCreation = () => {
 
   const destinationFromCard: DestinationDataWithRating =
     location.state?.destination;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (!destinationFromCard) {
+      console.log('No destination found');
+      navigate('/404');
+    }
+  }, [destinationFromCard, navigate]);
+
+  if (!destinationFromCard) {
+    return null;
+  }
 
   return (
     <div className='flex bg-gradient-to-br from-primary to-lightblue'>

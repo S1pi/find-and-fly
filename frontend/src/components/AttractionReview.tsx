@@ -46,8 +46,24 @@ const AttractionReview = ({selectedDestination}: AttractionReviewProps) => {
   );
 
   return (
-    <div className='flex h-screen flex-12 flex-col items-center gap-4 px-12 py-4 text-secondary'>
+    <div className='flex h-screen flex-12 flex-col items-center justify-evenly gap-4 px-12 py-6 text-secondary'>
       <h1>Add Review For Attraction In {selectedDestination.name}</h1>
+      <div className='flex h-full max-h-1/2 flex-col items-center gap-4'>
+        <h4 className=''>Preview Your Attraction Card</h4>
+        <SubDestCard
+          subDestination={{
+            user_id: 1,
+            name: inputs.attractionName || 'Attraction Name',
+            rating: rating,
+            file_url: `${selectedImage ? URL.createObjectURL(selectedImage as File) : ' https://fakeimg.pl/600x400'}`,
+            file_name: 'SubDestination Image',
+            id: 1,
+            destination_id: selectedDestination.id,
+            description: 'SubDestination Description',
+            created_at: new Date(),
+          }}
+        />
+      </div>
       <div className='flex w-full flex-row justify-evenly gap-24'>
         <div className='flex max-w-96 flex-1 flex-col items-center gap-12 rounded-lg bg-secondary p-4 text-primary drop-shadow-sidebar-strong'>
           <CustomImageInput
@@ -103,24 +119,6 @@ const AttractionReview = ({selectedDestination}: AttractionReviewProps) => {
             Submit Review
           </BaseBtn>
         </form>
-      </div>
-      <div className='flex h-full flex-col items-center justify-between gap-4'>
-        <h4 className=''>Preview Your Attraction Card</h4>
-        <div className='flex h-full'>
-          <SubDestCard
-            subDestination={{
-              user_id: 1,
-              name: inputs.attractionName || 'Attraction Name',
-              rating: rating,
-              file_url: `${selectedImage ? URL.createObjectURL(selectedImage as File) : ' https://fakeimg.pl/600x400'}`,
-              file_name: 'SubDestination Image',
-              id: 1,
-              destination_id: selectedDestination.id,
-              description: 'SubDestination Description',
-              created_at: new Date(),
-            }}
-          />
-        </div>
       </div>
     </div>
   );

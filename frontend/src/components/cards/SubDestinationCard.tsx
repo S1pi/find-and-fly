@@ -13,7 +13,7 @@ const SubDestCard = ({subDestination}: SubDestCardProps) => {
   };
 
   return (
-    <div className='relative flex max-h-80 w-full flex-col justify-center rounded-lg bg-white shadow-lg'>
+    <div className='relative flex h-62 max-w-50 flex-col justify-center rounded-lg bg-white shadow-lg'>
       <div
         className='absolute top-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-lightgrey'
         onClick={() => alert('Report subdestination will be implemented soon!')}

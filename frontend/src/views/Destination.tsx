@@ -140,7 +140,7 @@ const Destination = () => {
               </div>
             )}
 
-            <div className='grid grid-cols-1 justify-items-center gap-4 py-4 smd:grid-cols-2 lg:gap-x-6 lg:gap-y-10 xl:grid-cols-3 xl:gap-6 3xl:grid-cols-4'>
+            <div className='grid h-full grid-cols-1 justify-items-center gap-4 py-4 smd:grid-cols-2 lg:gap-x-6 lg:gap-y-10 xl:grid-cols-3 xl:gap-6 3xl:grid-cols-4'>
               {subDestinations.map((subDestination) => (
                 <SubDestCard
                   key={subDestination.id}

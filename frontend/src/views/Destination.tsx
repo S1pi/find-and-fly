@@ -2,16 +2,18 @@ import {Link, useLocation, useNavigate} from 'react-router-dom';
 import BaseBtn from '../components/buttons/BaseBtn';
 import Header from '../components/Header';
 import {MdLocationOn} from 'react-icons/md';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {DestinationDataWithRating} from '../types/DataTypes';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
 import {useDestinations, useReviews} from '../hooks/apiHooks';
 import ReviewCard from '../components/cards/ReviewCard';
 import SubDestCard from '../components/cards/SubDestinationCard';
+import CommentModal from '../components/modals/CommentModal';
 
 const Destination = () => {
   const {reviews, getReviewsByDestId} = useReviews();
   const {subDestinations, getSubDestinations} = useDestinations();
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -113,6 +115,14 @@ const Destination = () => {
           </div>
         </div>
 
+        {/* Review modal */}
+        {isReviewOpen && (
+          <CommentModal
+            onClose={() => setIsReviewOpen(false)}
+            review={reviews[0]}
+          />
+        )}
+
         <div className='flex w-full flex-1 flex-col bg-gradient-to-br from-primary to-lightblue py-4 shadow-containerTop sm:flex-row'>
           {/* City reviews section */}
           <div className='container px-2 text-center md:px-8 lg:px-4 xl:px-8 2xl:px-24 3xl:px-4'>
@@ -128,7 +138,11 @@ const Destination = () => {
               {/* TODO: Add reviews as card components */}
               {reviews.map((review) => (
                 // <ReviewCard key={review.id} review={review} />
-                <ReviewCard key={review.id} review={review} />
+                <ReviewCard
+                  key={review.id}
+                  review={review}
+                  setIsReviewOpen={setIsReviewOpen}
+                />
               ))}
             </div>
           </div>

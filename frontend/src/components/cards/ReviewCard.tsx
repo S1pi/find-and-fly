@@ -4,12 +4,15 @@ import {Review} from '../../types/DataTypes';
 import Avatar from '../customs/Avatar';
 import {TiThumbsUp} from 'react-icons/ti';
 import {TiThumbsDown} from 'react-icons/ti';
+import {MdOutlineOpenInFull} from 'react-icons/md';
+import {AiOutlineFullscreen} from 'react-icons/ai';
 
 type ReviewCardProps = {
   review: Review;
+  setIsReviewOpen: (value: boolean) => void;
 };
 
-const ReviewCard = ({review}: ReviewCardProps) => {
+const ReviewCard = ({review, setIsReviewOpen}: ReviewCardProps) => {
   const capitalize = (str: string | null | undefined) => {
     if (!str) return 'No username';
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -34,7 +37,11 @@ const ReviewCard = ({review}: ReviewCardProps) => {
   const tripTypeIcon = iconMap[review.trip_type as keyof typeof iconMap];
 
   return (
-    <div className='flex h-50 w-full max-w-72 flex-col justify-evenly gap-2 rounded-3xl bg-white px-4 py-2 shadow-lg'>
+    <div className='relative flex h-50 w-full max-w-72 flex-col justify-evenly gap-2 rounded-3xl bg-white px-4 py-2 shadow-lg'>
+      <AiOutlineFullscreen
+        className='absolute top-4 right-4 cursor-pointer text-h3 hover:text-h2'
+        onClick={() => setIsReviewOpen(true)} // Add onClick to open modal
+      />
       <div className='flex justify-center gap-4'>
         <Avatar
           username={review.username || 'No username'}

@@ -3,7 +3,7 @@ import {useDestinations} from '../hooks/apiHooks';
 import {DestinationDataWithRating} from '../types/DataTypes';
 import Header from '../components/Header';
 import DestinationCard from '../components/cards/DestinationCard';
-import AddDestinationModal from '../components/AddDestinationModal';
+import AddDestinationModal from '../components/modals/AddDestinationModal';
 import BaseBtn from '../components/buttons/BaseBtn';
 import {MdAddLocation} from 'react-icons/md';
 

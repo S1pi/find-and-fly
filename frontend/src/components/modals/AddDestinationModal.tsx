@@ -1,11 +1,11 @@
 import {useEffect, useRef, useState} from 'react';
-import CustomImageInput from './customs/CustomImageInput';
+import CustomImageInput from '../customs/CustomImageInput';
 import {IoIosCloseCircle} from 'react-icons/io';
-import BaseBtn from './buttons/BaseBtn';
-import {useForm} from '../hooks/formHooks';
-import {useDestinations} from '../hooks/apiHooks';
-import CustomDropDown from './customs/CustomDropDown';
-import {Category, DestinationCreate} from '../types/DataTypes';
+import BaseBtn from '../buttons/BaseBtn';
+import {useForm} from '../../hooks/formHooks';
+import {useDestinations} from '../../hooks/apiHooks';
+import CustomDropDown from '../customs/CustomDropDown';
+import {Category, DestinationCreate} from '../../types/DataTypes';
 
 type AddDestinationModalProps = {
   onClose: () => void;

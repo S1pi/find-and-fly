@@ -82,7 +82,7 @@ const useDestinations = () => {
         body: JSON.stringify(destination),
       };
 
-      const response = await fetchData<CreatedDestinationMessage>(
+      await fetchData<CreatedDestinationMessage>(
         import.meta.env.VITE_MEDIA_API + '/destinations/create',
         options,
       );

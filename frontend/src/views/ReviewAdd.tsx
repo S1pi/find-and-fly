@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useDestinations} from '../hooks/apiHooks';
 import {DestinationDataWithRating} from '../types/DataTypes';
 import Header from '../components/Header';
@@ -16,13 +16,16 @@ const ReviewAdd = () => {
     DestinationDataWithRating | undefined
   >(undefined);
 
+  // workaround for unused variable error
+  selectedItem;
+
   return (
     <>
       <Header />
       <div className='flex h-full flex-col bg-gradient-to-br from-primary to-lightblue'>
         <div
           className='flex min-h-[50vh] flex-col items-center justify-center gap-8 bg-cover bg-center bg-no-repeat lg:min-h-[60vh]'
-          style={{backgroundImage: 'url(/img/reviewbg.png)'}}
+          style={{backgroundImage: 'url(../img/reviewbg.png)'}}
         >
           <h1 className='max-w-2/5 text-center text-h4 font-bold text-primary drop-shadow-text sm:text-h3 lg:text-h1'>
             Review Your Favorite Destinations Or Bad Experiences

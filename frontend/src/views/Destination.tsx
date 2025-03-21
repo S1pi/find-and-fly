@@ -48,7 +48,7 @@ const Destination = () => {
         <div
           className='flex min-h-[40vh] justify-end bg-cover bg-center p-10'
           style={{
-            backgroundImage: `url(/img/reviewbg.png)`,
+            backgroundImage: `url(../img/reviewbg.png)`,
           }}
         >
           {/* // wrapper */}

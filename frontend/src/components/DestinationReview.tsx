@@ -20,12 +20,12 @@ const DestinationReview = ({selectedDestination}: DestinationReviewProps) => {
   const {postReview} = useReviews();
 
   const tripTypeIcons = [
-    {name: 'Family', icon: '/img/icon-family.png'},
-    {name: 'Friends', icon: '/img/icon-friends.png'},
-    {name: 'Solo', icon: '/img/icon-solo.png'},
-    {name: 'Business', icon: '/img/icon-business.png'},
-    {name: 'Couple', icon: '/img/icon-couple.png'},
-    {name: 'Other', icon: '/img/icon-other.png'},
+    {name: 'Family', icon: '../img/icon-family.png'},
+    {name: 'Friends', icon: '../img/icon-friends.png'},
+    {name: 'Solo', icon: '../img/icon-solo.png'},
+    {name: 'Business', icon: '../img/icon-business.png'},
+    {name: 'Couple', icon: '../img/icon-couple.png'},
+    {name: 'Other', icon: '../img/icon-other.png'},
   ];
 
   const tripTypes = [

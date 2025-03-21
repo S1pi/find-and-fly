@@ -46,7 +46,7 @@ const Header = () => {
   return (
     <div className='relative z-500000000 flex h-22 w-full items-center justify-center bg-primary px-2 drop-shadow-md'>
       <img
-        src='/img/FindAndFlyLogo.png'
+        src='https://users.metropolia.fi/~miikavs/Find-And-Fly/img/FindAndFlyLogo.png'
         alt='Find&Fly Logo'
         className='absolute left-4 h-3/5 cursor-pointer rounded-2xl md:h-3/4'
         onClick={() => navigation('/')}

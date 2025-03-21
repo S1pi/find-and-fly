@@ -4,7 +4,6 @@ import {Review} from '../../types/DataTypes';
 import Avatar from '../customs/Avatar';
 import {TiThumbsUp} from 'react-icons/ti';
 import {TiThumbsDown} from 'react-icons/ti';
-import {MdOutlineOpenInFull} from 'react-icons/md';
 import {AiOutlineFullscreen} from 'react-icons/ai';
 
 type ReviewCardProps = {
@@ -31,12 +30,12 @@ const ReviewCard = ({
   });
 
   const iconMap = {
-    solo: '/img/icon-solo.png',
-    family: '/img/icon-family.png',
-    friends: '/img/icon-friends.png',
-    couple: '/img/icon-couple.png',
-    business: '/img/icon-business.png',
-    other: '/img/icon-other.png',
+    solo: '../img/icon-solo.png',
+    family: '../img/icon-family.png',
+    friends: '../img/icon-friends.png',
+    couple: '../img/icon-couple.png',
+    business: '../img/icon-business.png',
+    other: '../img/icon-other.png',
   };
 
   const tripTypeIcon = iconMap[review.trip_type as keyof typeof iconMap];

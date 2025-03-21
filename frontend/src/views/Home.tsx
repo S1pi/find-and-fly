@@ -13,6 +13,9 @@ const Home = () => {
     DestinationDataWithRating | undefined
   >(undefined);
 
+  // workaround for unused variable error
+  selectedItem;
+
   const sortByRating = (
     a: DestinationDataWithRating,
     b: DestinationDataWithRating,
@@ -42,35 +45,35 @@ const Home = () => {
             >
               <SortCard text='Beach'>
                 <img
-                  src='/beach.svg'
+                  src='./beach.svg'
                   alt='waves svg icon'
                   className='h-[20px] w-[20px]'
                 />
               </SortCard>
               <SortCard text='Beach'>
                 <img
-                  src='/beach.svg'
+                  src='./beach.svg'
                   alt='waves svg icon'
                   className='h-[20px] w-[20px]'
                 />
               </SortCard>
               <SortCard text='Beach'>
                 <img
-                  src='/beach.svg'
+                  src='./beach.svg'
                   alt='waves svg icon'
                   className='h-[20px] w-[20px]'
                 />
               </SortCard>
               <SortCard text='Beach'>
                 <img
-                  src='/beach.svg'
+                  src='./beach.svg'
                   alt='waves svg icon'
                   className='h-[20px] w-[20px]'
                 />
               </SortCard>
               <SortCard text='Beach'>
                 <img
-                  src='/beach.svg'
+                  src='./beach.svg'
                   alt='waves svg icon'
                   className='h-[20px] w-[20px]'
                 />

@@ -10,9 +10,14 @@ import {AiOutlineFullscreen} from 'react-icons/ai';
 type ReviewCardProps = {
   review: Review;
   setIsReviewOpen: (value: boolean) => void;
+  setSelectedReview: (value: Review | null) => void;
 };
 
-const ReviewCard = ({review, setIsReviewOpen}: ReviewCardProps) => {
+const ReviewCard = ({
+  review,
+  setIsReviewOpen,
+  setSelectedReview,
+}: ReviewCardProps) => {
   const capitalize = (str: string | null | undefined) => {
     if (!str) return 'No username';
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -40,7 +45,10 @@ const ReviewCard = ({review, setIsReviewOpen}: ReviewCardProps) => {
     <div className='relative flex h-50 w-full max-w-72 flex-col justify-evenly gap-2 rounded-3xl bg-white px-4 py-2 shadow-lg'>
       <AiOutlineFullscreen
         className='absolute top-4 right-4 cursor-pointer text-h3 hover:text-h2'
-        onClick={() => setIsReviewOpen(true)} // Add onClick to open modal
+        onClick={() => {
+          setIsReviewOpen(true);
+          setSelectedReview(review);
+        }} // Add onClick to open modal
       />
       <div className='flex justify-center gap-4'>
         <Avatar

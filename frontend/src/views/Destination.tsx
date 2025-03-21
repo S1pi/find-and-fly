@@ -3,7 +3,7 @@ import BaseBtn from '../components/buttons/BaseBtn';
 import Header from '../components/Header';
 import {MdLocationOn} from 'react-icons/md';
 import {useEffect, useState} from 'react';
-import {DestinationDataWithRating} from '../types/DataTypes';
+import {DestinationDataWithRating, Review} from '../types/DataTypes';
 import {Rating, ThinRoundedStar} from '@smastrom/react-rating';
 import {useDestinations, useReviews} from '../hooks/apiHooks';
 import ReviewCard from '../components/cards/ReviewCard';
@@ -14,6 +14,7 @@ const Destination = () => {
   const {reviews, getReviewsByDestId} = useReviews();
   const {subDestinations, getSubDestinations} = useDestinations();
   const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const [selectedReview, setSelectedReview] = useState<Review | null>(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -119,7 +120,7 @@ const Destination = () => {
         {isReviewOpen && (
           <CommentModal
             onClose={() => setIsReviewOpen(false)}
-            review={reviews[0]}
+            review={selectedReview as Review}
           />
         )}
 
@@ -142,6 +143,7 @@ const Destination = () => {
                   key={review.id}
                   review={review}
                   setIsReviewOpen={setIsReviewOpen}
+                  setSelectedReview={setSelectedReview}
                 />
               ))}
             </div>

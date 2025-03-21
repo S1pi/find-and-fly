@@ -60,6 +60,7 @@
   /* Media queries */
   /* --breakpoint-2xl: 90rem; */
   /* --breakpoint-custom-2xl: 1440px; */
+  --breakpoint-4xl: 112rem;
   --breakpoint-3xl: 104rem;
   --breakpoint-1xl: 75rem;
   --breakpoint-mid: 68rem;

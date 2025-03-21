@@ -15,6 +15,7 @@ import {
   CreatedReviewMessage,
   FileUploadResponse,
   LoginResponse,
+  SuccessUserCreationResponse,
   UserResponse,
 } from '../types/MessageTypes';
 
@@ -260,7 +261,27 @@ const useAuthentication = () => {
     }
   };
 
-  return {postLogin};
+  const postRegister = async (creds: Credentials & {email: string}) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(creds),
+    };
+
+    try {
+      const response = await fetchData<SuccessUserCreationResponse>(
+        import.meta.env.VITE_AUTH_API + '/auth/register',
+        options,
+      );
+      return response.message;
+    } catch (err) {
+      throw new Error((err as Error).message);
+    }
+  };
+
+  return {postLogin, postRegister};
 };
 
 const useUser = () => {

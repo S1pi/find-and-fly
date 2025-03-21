@@ -1,15 +1,46 @@
+import {useAuthentication} from '../hooks/apiHooks';
 import {useForm} from '../hooks/formHooks';
+import useAuth from '../hooks/useAuth';
+import {Credentials} from '../types/UserTypes';
 import BaseBtn from './buttons/BaseBtn';
 
 const RegisterForm = () => {
+  const {postRegister} = useAuthentication();
+  const {handleLogin} = useAuth();
+
   const initialValues = {
     username: '',
     password: '',
     email: '',
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     // Handle login here
+    try {
+      const successMessage = await postRegister(
+        inputs as Credentials & {email: string},
+      );
+
+      if (successMessage === 'User created successfully') {
+        handleLogin(inputs as Credentials);
+      }
+    } catch (err) {
+      const errMessage = (err as Error).message;
+      if (errMessage.includes('Invalid email')) {
+        alert('Invalid email format');
+      }
+
+      if (
+        errMessage.includes(
+          'Password must contain at least one uppercase letter',
+        )
+      ) {
+        alert('Password must contain at least one uppercase letter');
+      }
+
+      console.log('Register failed');
+      console.error(err);
+    }
   };
 
   const {handleSubmit, handleInputChange, inputs} = useForm(
@@ -18,13 +49,14 @@ const RegisterForm = () => {
   );
 
   return (
-    <form className='flex flex-col gap-4'>
+    <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
       <h1 className='self-center text-h1 font-bold text-primary'>
         Create an account
       </h1>
       <input
         type='text'
         placeholder='Username'
+        minLength={3}
         onChange={handleInputChange}
         name='username'
         className='rounded-md bg-primary p-2'
@@ -33,6 +65,7 @@ const RegisterForm = () => {
       <input
         type='password'
         placeholder='Password'
+        minLength={6}
         className='rounded-md bg-primary p-2'
         name='password'
         onChange={handleInputChange}
@@ -46,10 +79,6 @@ const RegisterForm = () => {
         onChange={handleInputChange}
         autoComplete='off'
       />
-      {/* Old Button */}
-      {/* <button className='cursor-pointer rounded-md bg-gradient-to-r from-blueg1 to-blueg2 p-2 text-primary'>
-        Register
-      </button> */}
 
       {/* On Click is needed but this case form handles submit so leave it empty */}
       <BaseBtn className='w-full' onClick={() => {}} type='submit'>

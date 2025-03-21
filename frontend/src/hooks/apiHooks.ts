@@ -34,7 +34,7 @@ const useDestinations = () => {
       const destinations = await fetchData<DestinationDataWithRating[]>(
         import.meta.env.VITE_MEDIA_API + '/destinations/all',
       );
-      console.log(destinations);
+      // console.log(destinations);
       setDestinations(destinations);
     } catch (err) {
       console.error((err as Error).message);
@@ -48,7 +48,7 @@ const useDestinations = () => {
           '/subdest/bydestination/' +
           destinationId,
       );
-      console.log(subDestinations);
+      // console.log(subDestinations);
       setSubDestinations(subDestinations);
     } catch (err) {
       console.error((err as Error).message);
@@ -64,7 +64,7 @@ const useDestinations = () => {
 
     try {
       const fileResponse = await postFile(file, token);
-      console.log('fileResponse: ', fileResponse);
+      // console.log('fileResponse: ', fileResponse);
       const destination = {
         ...destinationInformation,
         file_data: {
@@ -92,7 +92,7 @@ const useDestinations = () => {
       // This don't work cuz response don't have average_rating
       // if want to use this, need to fetch all destinations again
       // setDestinations([...destinations, response]);
-      console.log(response);
+      // console.log(response);
     } catch (err) {
       console.error((err as Error).message);
     }
@@ -107,7 +107,7 @@ const useDestinations = () => {
 
     try {
       const fileResponse = await postFile(file, token);
-      console.log('fileResponse: ', fileResponse);
+      // console.log('fileResponse: ', fileResponse);
       const subDestination = {
         ...attractionInfo,
         file_data: {
@@ -135,7 +135,7 @@ const useDestinations = () => {
       // This don't work cuz response don't have average_rating
       // if want to use this, need to fetch all destinations again
       // setSubDestinations([...subDestinations, response]);
-      console.log(response);
+      // console.log(response);
       return response.message;
     } catch (err) {
       console.error((err as Error).message);
@@ -159,7 +159,7 @@ const useDestinations = () => {
 
           return 0;
         });
-        console.log(sortedCategories);
+        // console.log(sortedCategories);
         setCategories(sortedCategories);
         // setCategories(categories);
       } catch (err) {
@@ -186,18 +186,18 @@ const useReviews = () => {
 
   const getReviewsByDestId = async (destinationId: number) => {
     try {
-      console.log('Fetching reviews for destination id: ' + destinationId);
+      // console.log('Fetching reviews for destination id: ' + destinationId);
 
       const reviews = await fetchData<Review[]>(
         import.meta.env.VITE_MEDIA_API +
           '/reviews/getall/byid/' +
           destinationId,
       );
-      console.log(reviews);
+      // console.log(reviews);
       setReviews(reviews);
     } catch (err) {
       if ((err as Error).message === 'No reviews found') {
-        console.log('No reviews found for destination id: ' + destinationId);
+        // console.log('No reviews found for destination id: ' + destinationId);
         setReviews([]);
         return;
       }
@@ -227,7 +227,7 @@ const useReviews = () => {
         import.meta.env.VITE_MEDIA_API + '/reviews/create',
         options,
       );
-      console.log(response);
+      // console.log(response);
       return response.message;
       // Don't work cuz response don't have username or profile_pic
       // setReviews([...reviews, response.review]);

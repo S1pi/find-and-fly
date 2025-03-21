@@ -15,7 +15,6 @@ const RegisterForm = () => {
   };
 
   const handleRegister = async () => {
-    // Handle login here
     try {
       const successMessage = await postRegister(
         inputs as Credentials & {email: string},
@@ -37,9 +36,6 @@ const RegisterForm = () => {
       ) {
         alert('Password must contain at least one uppercase letter');
       }
-
-      console.log('Register failed');
-      console.error(err);
     }
   };
 

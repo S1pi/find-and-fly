@@ -29,10 +29,10 @@ const Header = () => {
 
   useEffect(() => {
     if (width <= 768) {
-      console.log('isSmallScreen');
+      // console.log('isSmallScreen');
       setIsSmallScreen(true);
     } else {
-      console.log('isDesktop');
+      // console.log('isDesktop');
       setIsSmallScreen(false);
     }
   }, [width]);

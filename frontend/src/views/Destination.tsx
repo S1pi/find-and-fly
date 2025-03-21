@@ -32,9 +32,9 @@ const Destination = () => {
     getReviewsByDestId(destinationFromCard.id);
     getSubDestinations(destinationFromCard.id);
 
-    console.log('subDestinations: ', subDestinations);
+    // console.log('subDestinations: ', subDestinations);
 
-    console.log('Destination reviews: ', reviews);
+    // console.log('Destination reviews: ', reviews);
   }, [destinationFromCard, navigate]);
 
   if (!destinationFromCard) {

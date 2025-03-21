@@ -57,7 +57,7 @@ const AuthProvider = ({children}: {children: React.ReactNode}) => {
       const userResponse = await getUserByToken(token);
 
       setUser(userResponse.userData);
-      console.log('Auto login: userResponse', userResponse);
+      // console.log('Auto login: userResponse', userResponse);
 
       if (location.state?.from) {
         const currentLocation = location.state?.from?.pathname || '/';

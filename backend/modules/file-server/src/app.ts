@@ -16,8 +16,15 @@ app.use(morgan('dev'));
 app.use(
   helmet({
     crossOriginResourcePolicy: {policy: 'cross-origin'},
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-eval'"],
+      },
+    },
   }),
 );
+
 app.use(cors({origin: '*'}));
 app.use(express.json());
 

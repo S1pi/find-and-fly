@@ -8,7 +8,6 @@ import {
 } from '../model/subDestModel';
 import {SubDestinationCreate} from 'types/DataTypes';
 import CustomError from 'utils/CustomError';
-import {CreatedDestinationMessage} from 'types/MessageTypes';
 
 const getAllSubDestinations = async (
   req: Request,

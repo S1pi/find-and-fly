@@ -22,7 +22,11 @@
     "start:auth": "cd modules/auth-server && npm start",
     "start:file": "cd modules/file-server && npm start",
     "start:media": "cd modules/media-server && npm start",
-    "start:all": "concurrently \"npm run start:auth\" \"npm run start:file\" \"npm run start:media\""
+    "start:all": "concurrently \"npm run start:auth\" \"npm run start:file\" \"npm run start:media\"",
+    "apidoc:file": "cd modules/file-server && npm run apidoc",
+    "apidoc:media": "cd modules/media-server && npm run apidoc",
+    "apidoc:auth": "cd modules/auth-server && npm run apidoc",
+    "apidoc:all": "concurrently \"npm run apidoc:auth\" \"npm run apidoc:file\" \"npm run apidoc:media\""
   },
   "keywords": [],
   "author": "",
@@ -52,6 +56,7 @@
     "@types/node": "^22.13.9",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
+    "apidoc": "^1.2.0",
     "eslint": "^9.20.0",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^15.14.0",

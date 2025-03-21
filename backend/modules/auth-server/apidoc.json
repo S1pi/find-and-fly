@@ -1,0 +1,13 @@
+{
+  "name": "Find&Fly Authentication Server",
+  "version": "1.0.0",
+  "description": "Find&Fly Authentication Server API documentation",
+  "title": "Authentication Server",
+  "url": "/api",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "exclude": ["node_modules/", "public/"],
+  "files": ["src/**/*.ts"]
+}

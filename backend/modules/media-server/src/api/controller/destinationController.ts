@@ -9,7 +9,7 @@ import {
   getDestinationListWithAllData,
   // getDestinationListWithFileData,
 } from '../model/destinationsModel';
-import {Destination, DestinationCreate} from 'types/DataTypes';
+import {DestinationCreate} from 'types/DataTypes';
 import {CreatedDestinationMessage} from 'types/MessageTypes';
 
 const getAllDestinations = async (

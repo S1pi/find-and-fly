@@ -3,6 +3,7 @@
     "outDir": "./dist" /* Redirect output structure to the directory. */,
     // "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
     "rootDir": "../..",
+    // "rootDir": "./src",
     "moduleResolution": "node" /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */,
     "sourceMap": true /* Generates corresponding '.map' file. */,
     "target": "ESNext" /* Set the JavaScript language version for emitted JavaScript and included TypeScript declarations. */,
@@ -14,7 +15,8 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "resolveJsonModule": true /* Include modules imported with '.json' extension. */,
     "composite": true /* Enable project references. */,
-    "baseUrl": "../.." /* Base directory to resolve non-absolute module names. */,
+    "baseUrl": "../.." /* Base directory to resolve non-absolute module names. THIS IS DEVELOPEMENT PHASE baseUrl*/,
+    // "baseUrl": "." /* Base directory to resolve non-absolute module names. */, // THIS IS PRODUCTION PHASE
     "paths": {
       "types/*": ["shared/types/*"],
       "utils/*": ["shared/utils/*"]
